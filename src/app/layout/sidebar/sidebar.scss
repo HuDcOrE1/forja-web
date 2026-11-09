@@ -1,0 +1,41 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+mat-nav-list {
+  padding-top: 1rem;
+}
+
+a[mat-list-item] {
+
+  color: #ffffff !important;
+
+  font-weight: 500;
+
+  border-radius: 8px;
+
+  margin: 4px 8px;
+}
+
+a[mat-list-item]:hover {
+
+  background: rgba(255, 255, 255, 0.08);
+}
+
+a[mat-list-item].active {
+
+  background: rgba(255, 255, 255, 0.12);
+}
+
+mat-icon {
+
+  color: #f59e0b;
+
+  margin-right: 12px;
+}
+
+span {
+
+  color: #ffffff;
+}

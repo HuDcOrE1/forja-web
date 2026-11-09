@@ -1,0 +1,35 @@
+.titulo-secao {
+
+  margin-top: 2rem;
+
+  margin-bottom: 1rem;
+}
+
+.graficos {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(500px, 1fr));
+
+  gap: 1rem;
+}
+
+.grafico-card {
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 1rem;
+
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, .08);
+}
+
+.grafico {
+
+  position: relative;
+
+  height: 300px;
+}

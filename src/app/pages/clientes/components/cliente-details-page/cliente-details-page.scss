@@ -1,0 +1,25 @@
+.header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 1.5rem;
+}
+
+.btn-voltar {
+
+  text-decoration: none;
+
+  padding: .75rem 1rem;
+
+  border-radius: 8px;
+
+  background: #f59e0b;
+
+  color: white;
+
+  font-weight: 600;
+}

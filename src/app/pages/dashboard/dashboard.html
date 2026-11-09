@@ -1,0 +1,28 @@
+@if (dashboard) {
+
+  <app-dashboard-kpis
+    [dashboard]="dashboard">
+  </app-dashboard-kpis>
+
+  <app-dashboard-analytics
+    [faturamentoDiarioChart]="faturamentoDiarioChart"
+    [topProdutosChart]="topProdutosChart"
+    [topClientesChart]="topClientesChart"
+    [receitaCategoriaChart]="receitaCategoriaChart"
+    [chartOptions]="chartOptions"
+    [lineChartType]="lineChartType"
+    [barChartType]="barChartType"
+    [doughnutChartType]="doughnutChartType">
+  </app-dashboard-analytics>
+
+  <app-dashboard-strategic
+    [receitaFormaPagamentoChart]="receitaFormaPagamentoChart"
+    [ocupacaoRaiasChart]="ocupacaoRaiasChart"
+    [saudeEstoque]="saudeEstoque"
+    [conversaoOperacional]="conversaoOperacional"
+    [chartOptions]="chartOptions"
+    [barChartType]="barChartType"
+    [doughnutChartType]="doughnutChartType">
+  </app-dashboard-strategic>
+
+}

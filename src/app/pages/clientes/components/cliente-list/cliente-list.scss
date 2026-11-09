@@ -1,0 +1,105 @@
+.table-container {
+
+  background: white;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, .08);
+}
+
+table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+thead {
+
+  background: #f3f4f6;
+}
+
+th {
+
+  text-align: left;
+
+  padding: 1rem;
+
+  color: #374151;
+
+  font-size: .9rem;
+
+  font-weight: 600;
+}
+
+td {
+
+  padding: 1rem;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+.sem-dados {
+
+  text-align: center;
+
+  color: #6b7280;
+
+  padding: 2rem;
+}
+
+.status-ativo {
+
+  color: #16a34a;
+
+  font-weight: 600;
+}
+
+.status-inativo {
+
+  color: #dc2626;
+
+  font-weight: 600;
+}
+
+.acoes {
+
+  display: flex;
+
+  gap: .5rem;
+}
+
+.btn-icon {
+
+  border: none;
+
+  background: transparent;
+
+  color: #f59e0b;
+
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+.btn-icon:hover {
+
+  color: #d97706;
+}
+
+@media (max-width: 768px) {
+
+  .table-container {
+
+    overflow-x: auto;
+  }
+
+  table {
+
+    min-width: 900px;
+  }
+
+}

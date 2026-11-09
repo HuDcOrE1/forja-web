@@ -1,0 +1,25 @@
+<div class="page-header">
+  <div>
+    <h1>Clientes</h1>
+    <p class="subtitulo">
+      Gestão de clientes do FORJA
+    </p>
+  </div>
+    <a
+        routerLink="/clientes/novo"
+        class="btn-primary">
+        Novo Cliente
+    </a>
+</div>
+
+<div class="filtros">
+  <input
+    type="text"
+    placeholder="Pesquisar cliente..." />
+</div>
+
+<div class="table-container">
+    <app-cliente-list
+         [clientes]="clientes">
+    </app-cliente-list>
+</div>

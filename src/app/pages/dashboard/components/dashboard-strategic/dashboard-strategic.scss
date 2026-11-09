@@ -1,0 +1,87 @@
+.titulo-secao {
+
+  margin-top: 2rem;
+
+  margin-bottom: 1rem;
+}
+
+.titulo-card {
+
+  margin-top: 2rem;
+
+  margin-bottom: 1rem;
+}
+
+.graficos {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(500px, 1fr));
+
+  gap: 1rem;
+}
+
+.grafico-card {
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 1rem;
+
+  box-shadow:
+    0 2px 10px rgba(0,0,0,.08);
+}
+
+.grafico {
+
+  position: relative;
+
+  height: 300px;
+}
+
+.cards {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 1rem;
+}
+
+.card {
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 1.25rem;
+
+  box-shadow:
+    0 2px 10px rgba(0,0,0,.08);
+
+  border-top: 4px solid #f59e0b;
+}
+
+.valor {
+
+  font-size: 2rem;
+
+  font-weight: 700;
+
+  color: #d97706;
+}
+
+.success {
+  color: #16a34a;
+}
+
+.warning {
+  color: #ca8a04;
+}
+
+.danger {
+  color: #dc2626;
+}

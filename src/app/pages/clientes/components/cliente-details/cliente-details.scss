@@ -1,0 +1,72 @@
+.details-container {
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 1.5rem;
+
+  box-shadow:
+    0 2px 10px rgba(0,0,0,.08);
+}
+
+.details-header {
+
+  margin-bottom: 1.5rem;
+}
+
+.details-header h2 {
+
+  margin: 0;
+
+  color: #111827;
+}
+
+.details-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(280px, 1fr));
+
+  gap: 1rem;
+}
+
+.detail-item {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: .25rem;
+}
+
+.detail-item label {
+
+  font-size: .875rem;
+
+  color: #6b7280;
+
+  font-weight: 600;
+}
+
+.detail-item span {
+
+  color: #111827;
+
+  font-size: 1rem;
+}
+
+.status-ativo {
+
+  color: #16a34a;
+
+  font-weight: 700;
+}
+
+.status-inativo {
+
+  color: #dc2626;
+
+  font-weight: 700;
+}
