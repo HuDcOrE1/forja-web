@@ -1,125 +1,117 @@
-<form
-  [formGroup]="form"
-  (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h2>Dados Pessoais</h2>
 
   <div class="form-grid">
+    <div class="form-group">
+      <label> Nome </label>
+      <input type="text" formControlName="nome" />
+
+      @if (form.controls.nome.invalid && form.controls.nome.touched) {
+        <small>
+          @if (form.controls.nome.errors?.['required']) {
+            Nome é obrigatório.
+          }
+
+          @if (form.controls.nome.errors?.['maxlength']) {
+            Nome deve possuir no máximo 150 caracteres.
+          }
+        </small>
+      }
+    </div>
 
     <div class="form-group">
+      <label> CPF </label>
+      <input type="text" formControlName="cpf" (input)="aplicarMascaraCpf($event)" />
 
-      <label>
-        Nome
-      </label>
+      @if (form.controls.cpf.invalid && form.controls.cpf.touched) {
+        <small>
+          @if (form.controls.cpf.errors?.['required']) {
+            CPF é obrigatório.
+          }
 
+          @if (form.controls.cpf.errors?.['cpfInvalido']) {
+            CPF inválido.
+          }
+        </small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label> E-mail </label>
+      <input type="email" formControlName="email" />
+
+      @if (form.controls.email.invalid && form.controls.email.touched) {
+        <small>
+          @if (form.controls.email.errors?.['required']) {
+            E-mail é obrigatório.
+          }
+
+          @if (form.controls.email.errors?.['email']) {
+            E-mail inválido.
+          }
+        </small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label> Telefone </label>
+      <input type="text" formControlName="telefone" (input)="aplicarMascaraTelefone($event)" />
+
+      @if (form.controls.telefone.invalid && form.controls.telefone.touched) {
+        <small>Telefone é obrigatório.</small>
+      }
+    </div>
+  </div>
+  <h2>Endereço</h2>
+
+  <div class="form-grid">
+    <div class="form-group">
+      <label>CEP </label>
       <input
         type="text"
-        formControlName="nome">
+        formControlName="cep"
+        (input)="aplicarMascaraCep($event)"
+        (blur)="buscarCep()"
+      />
+    </div>
 
-      @if (
-        form.controls.nome.invalid &&
-        form.controls.nome.touched
-      ) {
-
-        <small>
-          Nome é obrigatório.
-        </small>
-
-      }
-
+    <div class="form-group form-group-large">
+      <label> Logradouro </label>
+      <input type="text" formControlName="logradouro" />
     </div>
 
     <div class="form-group">
-
-      <label>
-        CPF
-      </label>
-
-      <input
-        type="text"
-        formControlName="cpf">
-
-      @if (
-        form.controls.cpf.invalid &&
-        form.controls.cpf.touched
-      ) {
-
-        <small>
-          CPF é obrigatório.
-        </small>
-
-      }
-
+      <label>Número</label>
+      <input type="text" formControlName="numero" />
     </div>
 
     <div class="form-group">
-
-      <label>
-        E-mail
-      </label>
-
-      <input
-        type="email"
-        formControlName="email">
-
-      @if (
-        form.controls.email.invalid &&
-        form.controls.email.touched
-      ) {
-
-        <small>
-          E-mail inválido.
-        </small>
-
-      }
-
+      <label>Complemento</label>
+      <input type="text" formControlName="complemento" />
     </div>
 
     <div class="form-group">
-
-      <label>
-        Telefone
-      </label>
-
-      <input
-        type="text"
-        formControlName="telefone">
-
-      @if (
-        form.controls.telefone.invalid &&
-        form.controls.telefone.touched
-      ) {
-
-        <small>
-          Telefone é obrigatório.
-        </small>
-
-      }
-
+      <label>Bairro</label>
+      <input type="text" formControlName="bairro" />
     </div>
 
+    <div class="form-group">
+      <label>Cidade</label>
+      <input type="text" formControlName="cidade" />
+    </div>
+
+    <div class="form-group">
+      <label>UF</label>
+      <input type="text" maxlength="2" formControlName="uf" />
+    </div>
   </div>
 
   <div class="checkbox-group">
-
-    <input
-      type="checkbox"
-      formControlName="ativo">
-
-    <label>
-      Cliente ativo
-    </label>
-
+    <input type="checkbox" formControlName="ativo" />
+    <label> Cliente ativo </label>
   </div>
 
   <div class="actions">
-
-    <button
-      class="btn-primary"
-      type="submit">
-
-      Salvar
-
-    </button>
-
+    <button class="btn-primary" type="submit">Salvar</button>
   </div>
-
 </form>

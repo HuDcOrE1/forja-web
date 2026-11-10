@@ -7,12 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [
-    RouterModule,
-    MatListModule,
-    MatIconModule
-  ],
+  imports: [RouterModule, MatListModule, MatIconModule],
   templateUrl: './sidebar.html',
-  styleUrl: './sidebar.scss'
+  styleUrl: './sidebar.scss',
 })
 export class SidebarComponent {}

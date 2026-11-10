@@ -1,5 +1,4 @@
 export interface ClienteResponse {
-
   id: number;
 
   nome: string;
@@ -10,8 +9,23 @@ export interface ClienteResponse {
 
   telefone: string;
 
+  cr: string;
+
   ativo: boolean;
 
   dataCadastro: string;
 
+  cep: string;
+
+  logradouro: string;
+
+  numero: string;
+
+  complemento: string;
+
+  bairro: string;
+
+  cidade: string;
+
+  uf: string;
 }

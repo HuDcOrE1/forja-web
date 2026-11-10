@@ -1,8 +1,5 @@
 @if (dashboard) {
-
-  <app-dashboard-kpis
-    [dashboard]="dashboard">
-  </app-dashboard-kpis>
+  <app-dashboard-kpis [dashboard]="dashboard"> </app-dashboard-kpis>
 
   <app-dashboard-analytics
     [faturamentoDiarioChart]="faturamentoDiarioChart"
@@ -12,7 +9,8 @@
     [chartOptions]="chartOptions"
     [lineChartType]="lineChartType"
     [barChartType]="barChartType"
-    [doughnutChartType]="doughnutChartType">
+    [doughnutChartType]="doughnutChartType"
+  >
   </app-dashboard-analytics>
 
   <app-dashboard-strategic
@@ -22,7 +20,7 @@
     [conversaoOperacional]="conversaoOperacional"
     [chartOptions]="chartOptions"
     [barChartType]="barChartType"
-    [doughnutChartType]="doughnutChartType">
+    [doughnutChartType]="doughnutChartType"
+  >
   </app-dashboard-strategic>
-
 }

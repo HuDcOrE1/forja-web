@@ -1,25 +1,32 @@
 <div class="page-header">
   <div>
     <h1>Clientes</h1>
-    <p class="subtitulo">
-      Gestão de clientes do FORJA
-    </p>
+    <p class="subtitulo">Gestão de clientes do FORJA</p>
   </div>
-    <a
-        routerLink="/clientes/novo"
-        class="btn-primary">
-        Novo Cliente
-    </a>
+  <a routerLink="/clientes/novo" class="btn-primary"> Novo Cliente </a>
 </div>
 
 <div class="filtros">
   <input
     type="text"
-    placeholder="Pesquisar cliente..." />
+    placeholder="Pesquisar cliente..."
+    [(ngModel)]="termoPesquisa"
+    (input)="pesquisar()"
+  />
 </div>
 
 <div class="table-container">
-    <app-cliente-list
-         [clientes]="clientes">
-    </app-cliente-list>
+  <app-cliente-list [clientes]="clientesPaginados"> </app-cliente-list>
+</div>
+
+<div class="pagination">
+  <button type="button" (click)="paginaAnterior()" [disabled]="paginaAtual === 1">Anterior</button>
+  <span>
+    Página {{ paginaAtual }}
+    de
+    {{ totalPaginas }}
+  </span>
+  <button type="button" (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginas">
+    Próxima
+  </button>
 </div>

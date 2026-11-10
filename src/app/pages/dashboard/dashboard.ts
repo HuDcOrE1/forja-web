@@ -16,21 +16,16 @@ import {
   Tooltip,
   Title,
   ChartConfiguration,
-  ChartType
+  ChartType,
 } from 'chart.js';
 
-import { DashboardResponse }
-from '../../core/models/dashboard-response';
+import { DashboardResponse } from '../../core/models/dashboard-response';
 import { DashboardService } from '../../core/services/dashboard.service';
-import { DashboardKpisComponent }
-from './components/dashboard-kpis/dashboard-kpis';
+import { DashboardKpisComponent } from './components/dashboard-kpis/dashboard-kpis';
 
-import { DashboardAnalyticsComponent }
-from './components/dashboard-analytics/dashboard-analytics';
+import { DashboardAnalyticsComponent } from './components/dashboard-analytics/dashboard-analytics';
 
-import { DashboardStrategicComponent }
-from './components/dashboard-strategic/dashboard-strategic';
-
+import { DashboardStrategicComponent } from './components/dashboard-strategic/dashboard-strategic';
 
 Chart.register(
   CategoryScale,
@@ -44,7 +39,7 @@ Chart.register(
   DoughnutController,
   Legend,
   Tooltip,
-  Title
+  Title,
 );
 
 @Component({
@@ -54,16 +49,13 @@ Chart.register(
     CommonModule,
     DashboardKpisComponent,
     DashboardAnalyticsComponent,
-    DashboardStrategicComponent
+    DashboardStrategicComponent,
   ],
   templateUrl: './dashboard.html',
-  styleUrl: './dashboard.scss'
+  styleUrl: './dashboard.scss',
 })
-export class DashboardComponent
-implements OnInit {
-
-  private readonly dashboardService =
-    inject(DashboardService);
+export class DashboardComponent implements OnInit {
+  private readonly dashboardService = inject(DashboardService);
 
   dashboard?: DashboardResponse;
 
@@ -74,23 +66,18 @@ implements OnInit {
   doughnutChartType: ChartType = 'doughnut';
 
   chartOptions: ChartConfiguration['options'] = {
-
     responsive: true,
 
     maintainAspectRatio: false,
 
     plugins: {
-
       legend: {
-
-        display: true
-      }
-    }
+        display: true,
+      },
+    },
   };
 
-  faturamentoDiarioChart:
-    ChartConfiguration<'line'>['data'] = {
-
+  faturamentoDiarioChart: ChartConfiguration<'line'>['data'] = {
     labels: [],
 
     datasets: [
@@ -98,91 +85,69 @@ implements OnInit {
         label: 'Faturamento Diário',
         data: [],
         tension: 0.3,
-        borderColor: '#f59e0b'
-      }
-    ]
+        borderColor: '#f59e0b',
+      },
+    ],
   };
 
-  topProdutosChart:
-    ChartConfiguration<'bar'>['data'] = {
-
+  topProdutosChart: ChartConfiguration<'bar'>['data'] = {
     labels: [],
 
     datasets: [
       {
         label: 'Top Produtos',
         data: [],
-        backgroundColor: '#f59e0b'
-      }
-    ]
+        backgroundColor: '#f59e0b',
+      },
+    ],
   };
 
-  topClientesChart:
-    ChartConfiguration<'bar'>['data'] = {
-
+  topClientesChart: ChartConfiguration<'bar'>['data'] = {
     labels: [],
 
     datasets: [
       {
         label: 'Top Clientes',
         data: [],
-        backgroundColor: '#2563eb'
-      }
-    ]
+        backgroundColor: '#2563eb',
+      },
+    ],
   };
 
-  receitaCategoriaChart:
-    ChartConfiguration<'doughnut'>['data'] = {
-
+  receitaCategoriaChart: ChartConfiguration<'doughnut'>['data'] = {
     labels: [],
 
     datasets: [
       {
         label: 'Receita por Categoria',
         data: [],
-        backgroundColor: [
-          '#f59e0b',
-          '#2563eb',
-          '#10b981',
-          '#ef4444',
-          '#8b5cf6'
-        ]
-      }
-    ]
+        backgroundColor: ['#f59e0b', '#2563eb', '#10b981', '#ef4444', '#8b5cf6'],
+      },
+    ],
   };
 
-  receitaFormaPagamentoChart:
-  ChartConfiguration<'doughnut'>['data'] = {
+  receitaFormaPagamentoChart: ChartConfiguration<'doughnut'>['data'] = {
+    labels: [],
 
-  labels: [],
+    datasets: [
+      {
+        label: 'Receita por Forma de Pagamento',
+        data: [],
+        backgroundColor: ['#f59e0b', '#2563eb', '#10b981', '#ef4444', '#8b5cf6'],
+      },
+    ],
+  };
 
-  datasets: [
-    {
-      label: 'Receita por Forma de Pagamento',
-      data: [],
-      backgroundColor: [
-        '#f59e0b',
-        '#2563eb',
-        '#10b981',
-        '#ef4444',
-        '#8b5cf6'
-      ]
-    }
-  ]
-};
-
-  ocupacaoRaiasChart:
-    ChartConfiguration<'bar'>['data'] = {
-
+  ocupacaoRaiasChart: ChartConfiguration<'bar'>['data'] = {
     labels: [],
 
     datasets: [
       {
         label: 'Ocupação das Raias',
         data: [],
-        backgroundColor: '#10b981'
-      }
-    ]
+        backgroundColor: '#10b981',
+      },
+    ],
   };
 
   saudeEstoque: any;
@@ -190,7 +155,6 @@ implements OnInit {
   conversaoOperacional: any;
 
   ngOnInit(): void {
-
     this.carregarDashboard();
 
     this.carregarFaturamentoDiario();
@@ -210,213 +174,128 @@ implements OnInit {
     this.carregarConversaoOperacional();
   }
 
-
   private carregarDashboard(): void {
-
-    this.dashboardService
-      .obterDashboard()
-      .subscribe((response: DashboardResponse) => {
-
-        this.dashboard = response;
-      });
+    this.dashboardService.obterDashboard().subscribe((response: DashboardResponse) => {
+      this.dashboard = response;
+    });
   }
 
- private carregarFaturamentoDiario(): void {
+  private carregarFaturamentoDiario(): void {
+    this.dashboardService.faturamentoDiario().subscribe((response: any[]) => {
+      this.faturamentoDiarioChart = {
+        labels: response.map((item) => item.data),
 
-    this.dashboardService
-      .faturamentoDiario()
-      .subscribe((response: any[]) => {
+        datasets: [
+          {
+            label: 'Faturamento Diário',
+            data: response.map((item) => item.valor),
 
-        this.faturamentoDiarioChart = {
+            tension: 0.3,
 
-          labels:
-            response.map(item => item.data),
-
-          datasets: [
-            {
-              label: 'Faturamento Diário',
-              data:
-                response.map(item => item.valor),
-
-              tension: 0.3,
-
-              borderColor: '#f59e0b'
-            }
-          ]
-        };
-      });
+            borderColor: '#f59e0b',
+          },
+        ],
+      };
+    });
   }
 
   private carregarTopProdutos(): void {
+    this.dashboardService.topProdutos().subscribe((response: any[]) => {
+      this.topProdutosChart = {
+        labels: response.map((item) => item.produto),
 
-    this.dashboardService
-      .topProdutos()
-      .subscribe((response: any[]) => {
+        datasets: [
+          {
+            label: 'Top Produtos',
 
-        this.topProdutosChart = {
+            data: response.map((item) => item.quantidade),
 
-          labels:
-            response.map(item => item.produto),
-
-          datasets: [
-            {
-              label: 'Top Produtos',
-
-              data:
-                response.map(item => item.quantidade),
-
-              backgroundColor: '#f59e0b'
-            }
-          ]
-        };
-
-      });
+            backgroundColor: '#f59e0b',
+          },
+        ],
+      };
+    });
   }
   private carregarTopClientes(): void {
+    this.dashboardService.topClientes().subscribe((response: any[]) => {
+      this.topClientesChart = {
+        labels: response.map((item) => item.cliente),
 
-    this.dashboardService
-      .topClientes()
-      .subscribe((response: any[]) => {
+        datasets: [
+          {
+            label: 'Top Clientes',
 
-        this.topClientesChart = {
+            data: response.map((item) => item.quantidadeCompras),
 
-          labels:
-            response.map(item => item.cliente),
-
-          datasets: [
-            {
-              label: 'Top Clientes',
-
-              data:
-                response.map(
-                  item => item.quantidadeCompras
-                ),
-
-              backgroundColor: '#2563eb'
-            }
-          ]
-        };
-
-      });
+            backgroundColor: '#2563eb',
+          },
+        ],
+      };
+    });
   }
 
-
-
   private carregarReceitaCategoria(): void {
+    this.dashboardService.receitaCategoria().subscribe((response: any[]) => {
+      this.receitaCategoriaChart = {
+        labels: response.map((item) => item.categoria),
 
-    this.dashboardService
-      .receitaCategoria()
-      .subscribe((response: any[]) => {
+        datasets: [
+          {
+            label: 'Receita por Categoria',
 
-        this.receitaCategoriaChart = {
+            data: response.map((item) => item.valor),
 
-          labels:
-            response.map(item => item.categoria),
-
-          datasets: [
-            {
-              label: 'Receita por Categoria',
-
-              data:
-                response.map(item => item.valor),
-
-              backgroundColor: [
-                '#f59e0b',
-                '#2563eb',
-                '#10b981',
-                '#ef4444',
-                '#8b5cf6'
-              ]
-            }
-          ]
-        };
-      });
+            backgroundColor: ['#f59e0b', '#2563eb', '#10b981', '#ef4444', '#8b5cf6'],
+          },
+        ],
+      };
+    });
   }
 
   private carregarReceitaFormaPagamento(): void {
+    this.dashboardService.receitaFormaPagamento().subscribe((response: any[]) => {
+      this.receitaFormaPagamentoChart = {
+        labels: response.map((item) => item.formaPagamento),
 
-    this.dashboardService
-      .receitaFormaPagamento()
-      .subscribe((response: any[]) => {
+        datasets: [
+          {
+            label: 'Receita por Forma de Pagamento',
 
-        this.receitaFormaPagamentoChart = {
+            data: response.map((item) => item.valor),
 
-          labels:
-            response.map(
-              item => item.formaPagamento
-            ),
-
-          datasets: [
-            {
-              label:
-                'Receita por Forma de Pagamento',
-
-              data:
-                response.map(
-                  item => item.valor
-                ),
-
-              backgroundColor: [
-                '#f59e0b',
-                '#2563eb',
-                '#10b981',
-                '#ef4444',
-                '#8b5cf6'
-              ]
-            }
-          ]
-        };
-
-      });
+            backgroundColor: ['#f59e0b', '#2563eb', '#10b981', '#ef4444', '#8b5cf6'],
+          },
+        ],
+      };
+    });
   }
   private carregarOcupacaoRaias(): void {
+    this.dashboardService.ocupacaoRaias().subscribe((response: any[]) => {
+      this.ocupacaoRaiasChart = {
+        labels: response.map((item) => item.raia),
 
-    this.dashboardService
-      .ocupacaoRaias()
-      .subscribe((response: any[]) => {
+        datasets: [
+          {
+            label: 'Ocupação das Raias',
 
-        this.ocupacaoRaiasChart = {
+            data: response.map((item) => item.quantidadeAgendamentos),
 
-          labels:
-            response.map(
-              item => item.raia
-            ),
-
-          datasets: [
-            {
-              label: 'Ocupação das Raias',
-
-              data:
-                response.map(
-                  item => item.quantidadeAgendamentos
-                ),
-
-              backgroundColor: '#10b981'
-            }
-          ]
-        };
-
-      });
+            backgroundColor: '#10b981',
+          },
+        ],
+      };
+    });
   }
 
-
   private carregarSaudeEstoque(): void {
-
-    this.dashboardService
-      .saudeEstoque()
-      .subscribe(response => {
-
-        this.saudeEstoque = response;
-      });
+    this.dashboardService.saudeEstoque().subscribe((response) => {
+      this.saudeEstoque = response;
+    });
   }
 
   private carregarConversaoOperacional(): void {
-
-    this.dashboardService
-      .conversaoOperacional()
-      .subscribe(response => {
-
-        this.conversaoOperacional = response;
-      });
+    this.dashboardService.conversaoOperacional().subscribe((response) => {
+      this.conversaoOperacional = response;
+    });
   }
 }

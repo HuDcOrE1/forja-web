@@ -6,15 +6,11 @@ import { BaseChartDirective } from 'ng2-charts';
 @Component({
   selector: 'app-dashboard-analytics',
   standalone: true,
-  imports: [
-    CommonModule,
-    BaseChartDirective
-  ],
+  imports: [CommonModule, BaseChartDirective],
   templateUrl: './dashboard-analytics.html',
-  styleUrl: './dashboard-analytics.scss'
+  styleUrl: './dashboard-analytics.scss',
 })
 export class DashboardAnalyticsComponent {
-
   @Input() faturamentoDiarioChart: any;
 
   @Input() topProdutosChart: any;
@@ -30,5 +26,4 @@ export class DashboardAnalyticsComponent {
   @Input() barChartType: any;
 
   @Input() doughnutChartType: any;
-
 }

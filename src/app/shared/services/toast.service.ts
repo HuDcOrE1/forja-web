@@ -1,74 +1,45 @@
 import { Injectable } from '@angular/core';
 
-import {
-  BehaviorSubject
-} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 export interface ToastMessage {
-
   message: string;
 
   type: 'success' | 'error' | 'warning' | 'info';
-
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ToastService {
+  private readonly toastSubject = new BehaviorSubject<ToastMessage | null>(null);
 
-  private readonly toastSubject =
-    new BehaviorSubject<ToastMessage | null>(null);
-
-  readonly toast$ =
-    this.toastSubject.asObservable();
+  readonly toast$ = this.toastSubject.asObservable();
 
   success(message: string): void {
-
-    this.show(
-      message,
-      'success'
-    );
+    this.show(message, 'success');
   }
 
   error(message: string): void {
-
-    this.show(
-      message,
-      'error'
-    );
+    this.show(message, 'error');
   }
 
   warning(message: string): void {
-
-    this.show(
-      message,
-      'warning'
-    );
+    this.show(message, 'warning');
   }
 
   info(message: string): void {
-
-    this.show(
-      message,
-      'info'
-    );
+    this.show(message, 'info');
   }
 
-  private show(
-    message: string,
-    type: ToastMessage['type']
-  ): void {
-
+  private show(message: string, type: ToastMessage['type']): void {
     this.toastSubject.next({
       message,
-      type
+      type,
     });
 
     setTimeout(() => {
-
       this.toastSubject.next(null);
-
     }, 4000);
   }
 }

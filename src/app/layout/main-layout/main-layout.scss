@@ -1,5 +1,4 @@
 .layout {
-
   height: 100vh;
 
   display: flex;
@@ -8,14 +7,12 @@
 }
 
 .content-area {
-
   flex: 1;
 
   display: flex;
 }
 
 .sidebar {
-
   width: 260px;
 
   background: #0f172a;
@@ -26,7 +23,6 @@
 }
 
 .content {
-
   flex: 1;
 
   padding: 1rem;

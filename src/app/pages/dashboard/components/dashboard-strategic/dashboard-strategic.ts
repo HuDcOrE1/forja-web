@@ -6,15 +6,11 @@ import { BaseChartDirective } from 'ng2-charts';
 @Component({
   selector: 'app-dashboard-strategic',
   standalone: true,
-  imports: [
-    CommonModule,
-    BaseChartDirective
-  ],
+  imports: [CommonModule, BaseChartDirective],
   templateUrl: './dashboard-strategic.html',
-  styleUrl: './dashboard-strategic.scss'
+  styleUrl: './dashboard-strategic.scss',
 })
 export class DashboardStrategicComponent {
-
   @Input() receitaFormaPagamentoChart: any;
 
   @Input() ocupacaoRaiasChart: any;
@@ -28,5 +24,4 @@ export class DashboardStrategicComponent {
   @Input() barChartType: any;
 
   @Input() doughnutChartType: any;
-
 }

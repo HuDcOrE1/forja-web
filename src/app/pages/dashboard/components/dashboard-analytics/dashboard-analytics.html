@@ -1,75 +1,49 @@
-<h1 class="titulo-secao">
-  Dashboard Analítico
-</h1>
+<h1 class="titulo-secao">Dashboard Analítico</h1>
 
 <div class="graficos">
-
   <div class="grafico-card">
-
     <h2>Faturamento Diário</h2>
 
     <div class="grafico">
-
       <canvas
         baseChart
         [data]="faturamentoDiarioChart"
         [options]="chartOptions"
-        [type]="lineChartType">
+        [type]="lineChartType"
+      >
       </canvas>
-
     </div>
-
   </div>
 
   <div class="grafico-card">
-
     <h2>Top Produtos</h2>
 
     <div class="grafico">
-
-      <canvas
-        baseChart
-        [data]="topProdutosChart"
-        [options]="chartOptions"
-        [type]="barChartType">
+      <canvas baseChart [data]="topProdutosChart" [options]="chartOptions" [type]="barChartType">
       </canvas>
-
     </div>
-
   </div>
 
   <div class="grafico-card">
-
     <h2>Top Clientes</h2>
 
     <div class="grafico">
-
-      <canvas
-        baseChart
-        [data]="topClientesChart"
-        [options]="chartOptions"
-        [type]="barChartType">
+      <canvas baseChart [data]="topClientesChart" [options]="chartOptions" [type]="barChartType">
       </canvas>
-
     </div>
-
   </div>
 
   <div class="grafico-card">
-
     <h2>Receita por Categoria</h2>
 
     <div class="grafico">
-
       <canvas
         baseChart
         [data]="receitaCategoriaChart"
         [options]="chartOptions"
-        [type]="doughnutChartType">
+        [type]="doughnutChartType"
+      >
       </canvas>
-
     </div>
-
   </div>
-
 </div>

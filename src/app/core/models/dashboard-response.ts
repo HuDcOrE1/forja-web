@@ -1,5 +1,4 @@
 export interface DashboardResponse {
-
   clientesAtivos: number;
 
   produtosAtivos: number;

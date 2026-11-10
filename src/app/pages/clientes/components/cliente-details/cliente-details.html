@@ -1,89 +1,125 @@
 @if (cliente) {
-
-<div class="details-container">
-
-  <div class="details-header">
-
-    <h2>
-      Dados do Cliente
-    </h2>
-
-  </div>
-
-  <div class="details-grid">
-
-    <div class="detail-item">
-
-      <label>Nome</label>
-
-      <span>
-        {{ cliente.nome }}
-      </span>
-
+  <div class="details-container">
+    <div class="details-header">
+      <h2>Dados do Cliente</h2>
     </div>
 
-    <div class="detail-item">
+    <div class="details-grid">
+      <div class="detail-item">
+        <label>Nome</label>
 
-      <label>CPF</label>
-
-      <span>
-        {{ cliente.cpf }}
-      </span>
-
-    </div>
-
-    <div class="detail-item">
-
-      <label>E-mail</label>
-
-      <span>
-        {{ cliente.email }}
-      </span>
-
-    </div>
-
-    <div class="detail-item">
-
-      <label>Telefone</label>
-
-      <span>
-        {{ cliente.telefone }}
-      </span>
-
-    </div>
-
-    <div class="detail-item">
-
-      <label>Status</label>
-
-      @if (cliente.ativo) {
-
-        <span class="status-ativo">
-          Ativo
+        <span>
+          {{ cliente.nome }}
         </span>
+      </div>
 
-      } @else {
+      <div class="detail-item">
+        <label>CPF</label>
 
-        <span class="status-inativo">
-          Inativo
+        <span>
+          {{ cliente.cpf }}
         </span>
+      </div>
 
-      }
+      <div class="detail-item">
+        <label>E-mail</label>
 
+        <span>
+          {{ cliente.email }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>Telefone</label>
+
+        <span>
+          {{ cliente.telefone }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>CR</label>
+
+        <span>
+          {{ cliente.cr || '-' }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>Status</label>
+
+        @if (cliente.ativo) {
+          <span class="status-ativo"> Ativo </span>
+        } @else {
+          <span class="status-inativo"> Inativo </span>
+        }
+      </div>
+
+      <div class="detail-item">
+        <label>Data Cadastro</label>
+
+        <span>
+          {{ cliente.dataCadastro }}
+        </span>
+      </div>
     </div>
 
-    <div class="detail-item">
-
-      <label>Data Cadastro</label>
-
-      <span>
-        {{ cliente.dataCadastro }}
-      </span>
-
+    <div class="details-header">
+      <h2>Endereço</h2>
     </div>
 
+    <div class="details-grid">
+      <div class="detail-item">
+        <label>CEP</label>
+
+        <span>
+          {{ cliente.cep || '-' }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>Logradouro</label>
+
+        <span>
+          {{ cliente.logradouro || '-' }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>Número</label>
+
+        <span>
+          {{ cliente.numero || '-' }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>Complemento</label>
+
+        <span>
+          {{ cliente.complemento || '-' }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>Bairro</label>
+
+        <span>
+          {{ cliente.bairro || '-' }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>Cidade</label>
+
+        <span>
+          {{ cliente.cidade || '-' }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>UF</label> <span> {{ cliente.uf || '-' }} </span>
+      </div>
+    </div>
   </div>
-
-</div>
-
 }

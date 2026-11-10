@@ -1,26 +1,41 @@
-import { HttpInterceptorFn } from '@angular/common/http';
+import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 
-export const authInterceptor: HttpInterceptorFn = (
-  req,
-  next
-) => {
+import { inject } from '@angular/core';
 
-  const token =
-    localStorage.getItem(
-      'forja_token'
-    );
+import { Router } from '@angular/router';
 
-  if (!token) {
-    return next(req);
-  }
+import { catchError } from 'rxjs/operators';
 
-  const clonedRequest =
-    req.clone({
-      setHeaders: {
-        Authorization:
-          `Bearer ${token}`
+import { throwError } from 'rxjs';
+
+import { AuthService } from '../auth/auth.service';
+
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  const authService = inject(AuthService);
+
+  const router = inject(Router);
+
+  const token = authService.getToken();
+
+  const request = token
+    ? req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+    : req;
+
+  return next(request).pipe(
+    catchError((error: HttpErrorResponse) => {
+      if (error.status === 401 || error.status === 403) {
+        authService.logout();
+
+        if (router.url !== '/login') {
+          router.navigate(['/login']);
+        }
       }
-    });
 
-  return next(clonedRequest);
+      return throwError(() => error);
+    }),
+  );
 };
