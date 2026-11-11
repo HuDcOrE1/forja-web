@@ -1,0 +1,49 @@
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Número</th>
+
+        <th>Descrição</th>
+
+        <th>Status</th>
+
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (raia of raias; track raia.id) {
+        <tr>
+          <td>
+            {{ raia.numero }}
+          </td>
+
+          <td>
+            {{ raia.descricao }}
+          </td>
+
+          <td>
+            @if (raia.ativa) {
+              <span class="status-ativo"> Ativa </span>
+            } @else {
+              <span class="status-inativo"> Inativa </span>
+            }
+          </td>
+
+          <td>
+            <div class="acoes">
+              <a class="btn-icon" [routerLink]="['/raias', raia.id, 'editar']"> Editar </a>
+
+              <a class="btn-icon" [routerLink]="['/raias', raia.id]"> Detalhes </a>
+            </div>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="4" class="sem-dados">Nenhuma raia encontrada.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

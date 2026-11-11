@@ -9,8 +9,23 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout';
 
 import { ClientesComponent } from './pages/clientes/clientes';
 import { ClienteDetailsPageComponent } from './pages/clientes/components/cliente-details-page/cliente-details-page';
-import { ClienteFormComponent } from './pages/clientes/components/cliente-form/cliente-form';
 import { ClienteFormPageComponent } from './pages/clientes/cliente-form-page/cliente-form-page';
+import { ProdutosComponent } from './pages/produtos/produtos';
+
+import { ProdutoDetailsPageComponent } from './pages/produtos/produto-details-page/produto-details-page';
+import { ProdutoFormPageComponent } from './pages/produtos/produto-form-page/produto-form-page';
+
+import { CategoriasProdutoComponent } from './pages/categorias-produto/categorias-produto';
+
+import { CategoriaDetailsPageComponent } from './pages/categorias-produto/categoria-details-page/categoria-details-page';
+
+import { CategoriaFormPageComponent } from './pages/categorias-produto/categoria-form-page/categoria-form-page';
+
+import { RaiasComponent } from './pages/raias/raias';
+
+import { RaiaFormPageComponent } from './pages/raias/raia-form-page/raia-form-page';
+
+import { RaiaDetailsPageComponent } from './pages/raias/raia-details-page/raia-details-page';
 
 export const routes: Routes = [
   {
@@ -27,6 +42,8 @@ export const routes: Routes = [
         path: '',
         component: DashboardComponent,
       },
+
+      /* CLIENTES */
 
       {
         path: 'clientes',
@@ -46,6 +63,70 @@ export const routes: Routes = [
       {
         path: 'clientes/:id/editar',
         component: ClienteFormPageComponent,
+      },
+
+      /* PRODUTOS */
+
+      {
+        path: 'produtos',
+        component: ProdutosComponent,
+      },
+
+      {
+        path: 'produtos/novo',
+        component: ProdutoFormPageComponent,
+      },
+
+      {
+        path: 'produtos/:id',
+        component: ProdutoDetailsPageComponent,
+      },
+
+      {
+        path: 'produtos/:id/editar',
+        component: ProdutoFormPageComponent,
+      },
+
+      /* CATEGORIAS DE PRODUTO */
+      {
+        path: 'categorias-produto',
+        component: CategoriasProdutoComponent,
+      },
+
+      {
+        path: 'categorias-produto/novo',
+        component: CategoriaFormPageComponent,
+      },
+
+      {
+        path: 'categorias-produto/:id',
+        component: CategoriaDetailsPageComponent,
+      },
+
+      {
+        path: 'categorias-produto/:id/editar',
+        component: CategoriaFormPageComponent,
+      },
+
+      /* RAIAS */
+      {
+        path: 'raias',
+        component: RaiasComponent,
+      },
+
+      {
+        path: 'raias/novo',
+        component: RaiaFormPageComponent,
+      },
+
+      {
+        path: 'raias/:id',
+        component: RaiaDetailsPageComponent,
+      },
+
+      {
+        path: 'raias/:id/editar',
+        component: RaiaFormPageComponent,
       },
     ],
   },

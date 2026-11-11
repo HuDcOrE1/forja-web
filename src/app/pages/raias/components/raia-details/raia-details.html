@@ -1,0 +1,43 @@
+@if (raia) {
+  <div class="details-container">
+    <div class="details-header">
+      <h2>Dados da Raia</h2>
+    </div>
+
+    <div class="details-grid">
+      <div class="detail-item">
+        <label> ID </label>
+
+        <span>
+          {{ raia.id }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label> Número </label>
+
+        <span>
+          {{ raia.numero }}
+        </span>
+      </div>
+
+      <div class="detail-item full-width">
+        <label> Descrição </label>
+
+        <span>
+          {{ raia.descricao }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label> Status </label>
+
+        @if (raia.ativa) {
+          <span class="status-ativo"> Ativa </span>
+        } @else {
+          <span class="status-inativo"> Inativa </span>
+        }
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,41 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="section-card">
+    <h2 class="section-title">Dados da Raia</h2>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label> Número da Raia </label>
+
+        <input type="number" min="1" formControlName="numero" />
+
+        @if (form.controls.numero.invalid && form.controls.numero.touched) {
+          <small> Número da raia é obrigatório. </small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label> Descrição </label>
+
+        <input type="text" formControlName="descricao" />
+
+        @if (form.controls.descricao.invalid && form.controls.descricao.touched) {
+          <small> Descrição é obrigatória. </small>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="checkbox-group">
+      <input type="checkbox" formControlName="ativa" />
+
+      <label> Raia ativa </label>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-secondary" type="button" onclick="history.back()">Voltar</button>
+
+    <button class="btn-primary" type="submit">Salvar</button>
+  </div>
+</form>

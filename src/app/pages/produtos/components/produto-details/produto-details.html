@@ -1,0 +1,111 @@
+@if (produto) {
+  <div class="details-container">
+    <div class="details-header">
+      <h2>Dados do Produto</h2>
+    </div>
+
+    <div class="details-grid">
+      <div class="detail-item">
+        <label>Código</label>
+
+        <span>
+          {{ produto.codigo }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>Nome</label>
+
+        <span>
+          {{ produto.nome }}
+        </span>
+      </div>
+
+      <div class="detail-item full-width">
+        <label>Descrição</label>
+
+        <span>
+          {{ produto.descricao || '-' }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>Categoria</label>
+
+        <span>
+          {{ produto.categoriaNome }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>Marca</label>
+
+        <span>
+          {{ produto.marca || '-' }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>Unidade de Medida</label>
+
+        <span>
+          {{ produto.unidadeMedida || '-' }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>Estoque Atual</label>
+
+        <span>
+          {{ produto.estoqueAtual }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>Estoque Mínimo</label>
+
+        <span>
+          {{ produto.estoqueMinimo }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>Valor de Custo</label>
+
+        <span>
+          {{ produto.valorCusto | currency: 'BRL' }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>Valor de Venda</label>
+
+        <span>
+          {{ produto.valorVenda | currency: 'BRL' }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label>Status Estoque</label>
+
+        @if (produto.estoqueAtual <= 0) {
+          <span class="status-sem-estoque"> Sem Estoque </span>
+        } @else if (produto.estoqueAtual <= produto.estoqueMinimo) {
+          <span class="status-critico"> Crítico </span>
+        } @else {
+          <span class="status-saudavel"> Saudável </span>
+        }
+      </div>
+
+      <div class="detail-item">
+        <label>Status Produto</label>
+
+        @if (produto.ativo) {
+          <span class="status-ativo"> Ativo </span>
+        } @else {
+          <span class="status-inativo"> Inativo </span>
+        }
+      </div>
+    </div>
+  </div>
+}

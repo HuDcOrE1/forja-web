@@ -1,0 +1,34 @@
+<div class="page-header">
+  <div>
+    <h1>Categorias de Produto</h1>
+
+    <p class="subtitulo">Gestão das categorias utilizadas nos produtos</p>
+  </div>
+
+  <a routerLink="/categorias-produto/novo" class="btn-primary"> Nova Categoria </a>
+</div>
+
+<div class="filtros">
+  <input
+    type="text"
+    placeholder="Pesquisar categoria..."
+    [(ngModel)]="termoPesquisa"
+    (input)="pesquisar()"
+  />
+</div>
+
+<app-categoria-list [categorias]="categoriasPaginadas"> </app-categoria-list>
+
+<div class="pagination">
+  <button type="button" (click)="paginaAnterior()" [disabled]="paginaAtual === 1">Anterior</button>
+
+  <span>
+    Página {{ paginaAtual }}
+    de
+    {{ totalPaginas }}
+  </span>
+
+  <button type="button" (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginas">
+    Próxima
+  </button>
+</div>

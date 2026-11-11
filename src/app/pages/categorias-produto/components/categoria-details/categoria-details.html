@@ -1,0 +1,43 @@
+@if (categoria) {
+  <div class="details-container">
+    <div class="details-header">
+      <h2>Dados da Categoria</h2>
+    </div>
+
+    <div class="details-grid">
+      <div class="detail-item">
+        <label> ID </label>
+
+        <span>
+          {{ categoria.id }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label> Nome </label>
+
+        <span>
+          {{ categoria.nome }}
+        </span>
+      </div>
+
+      <div class="detail-item full-width">
+        <label> Descrição </label>
+
+        <span>
+          {{ categoria.descricao || '-' }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label> Status </label>
+
+        @if (categoria.ativo) {
+          <span class="status-ativo"> Ativa </span>
+        } @else {
+          <span class="status-inativo"> Inativa </span>
+        }
+      </div>
+    </div>
+  </div>
+}

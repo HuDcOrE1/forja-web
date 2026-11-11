@@ -1,0 +1,34 @@
+<div class="page-header">
+  <div>
+    <h1>Produtos</h1>
+
+    <p class="subtitulo">Gestão de produtos e estoque do FORJA</p>
+  </div>
+
+  <a routerLink="/produtos/novo" class="btn-primary"> Novo Produto </a>
+</div>
+
+<div class="filtros">
+  <input
+    type="text"
+    placeholder="Pesquisar produto..."
+    [(ngModel)]="termoPesquisa"
+    (input)="pesquisar()"
+  />
+</div>
+
+<app-produto-list [produtos]="produtosPaginados"> </app-produto-list>
+
+<div class="pagination">
+  <button type="button" (click)="paginaAnterior()" [disabled]="paginaAtual === 1">Anterior</button>
+
+  <span>
+    Página {{ paginaAtual }}
+    de
+    {{ totalPaginas }}
+  </span>
+
+  <button type="button" (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginas">
+    Próxima
+  </button>
+</div>

@@ -1,0 +1,15 @@
+<div class="header">
+  <div>
+    <h1>
+      @if (editando) {
+        Editar Categoria
+      } @else {
+        Nova Categoria
+      }
+    </h1>
+  </div>
+
+  <a routerLink="/categorias-produto" class="btn-voltar"> Voltar </a>
+</div>
+
+<app-categoria-form [categoria]="categoria" (salvar)="salvar($event)"> </app-categoria-form>

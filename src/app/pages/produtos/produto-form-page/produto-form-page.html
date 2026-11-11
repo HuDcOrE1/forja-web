@@ -1,0 +1,15 @@
+<div class="header">
+  <div>
+    <h1>
+      @if (editando) {
+        Editar Produto
+      } @else {
+        Novo Produto
+      }
+    </h1>
+  </div>
+
+  <a routerLink="/produtos" class="btn-voltar"> Voltar </a>
+</div>
+
+<app-produto-form [produto]="produto" (salvar)="salvar($event)"> </app-produto-form>

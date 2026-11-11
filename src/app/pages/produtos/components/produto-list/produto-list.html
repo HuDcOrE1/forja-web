@@ -1,0 +1,91 @@
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Código</th>
+
+        <th>Nome</th>
+
+        <th>Categoria</th>
+
+        <th>Marca</th>
+
+        <th>Unidade</th>
+
+        <th>Estoque Atual</th>
+
+        <th>Estoque Mínimo</th>
+
+        <th>Status Estoque</th>
+
+        <th>Status</th>
+
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (produto of produtos; track produto.id) {
+        <tr>
+          <td>
+            {{ produto.codigo }}
+          </td>
+
+          <td>
+            {{ produto.nome }}
+          </td>
+
+          <td>
+            {{ produto.categoriaNome }}
+          </td>
+
+          <td>
+            {{ produto.marca }}
+          </td>
+
+          <td>
+            {{ produto.unidadeMedida }}
+          </td>
+
+          <td>
+            {{ produto.estoqueAtual }}
+          </td>
+
+          <td>
+            {{ produto.estoqueMinimo }}
+          </td>
+
+          <td>
+            @if (semEstoque(produto)) {
+              <span class="status-sem-estoque"> Sem Estoque </span>
+            } @else if (estoqueCritico(produto)) {
+              <span class="status-critico"> Crítico </span>
+            } @else {
+              <span class="status-saudavel"> Saudável </span>
+            }
+          </td>
+
+          <td>
+            @if (produto.ativo) {
+              <span class="status-ativo"> Ativo </span>
+            } @else {
+              <span class="status-inativo"> Inativo </span>
+            }
+          </td>
+
+          <td>
+            <div class="acoes">
+              <a class="btn-icon" [routerLink]="['/produtos', produto.id, 'editar']"> Editar </a>
+
+              <a class="btn-icon" [routerLink]="['/produtos', produto.id]"> Detalhes </a>
+            </div>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="10" class="sem-dados">Nenhum produto encontrado.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,15 @@
+<div class="header">
+  <div>
+    <h1>
+      @if (editando) {
+        Editar Raia
+      } @else {
+        Nova Raia
+      }
+    </h1>
+  </div>
+
+  <a routerLink="/raias" class="btn-voltar"> Voltar </a>
+</div>
+
+<app-raia-form [raia]="raia" (salvar)="salvar($event)"> </app-raia-form>

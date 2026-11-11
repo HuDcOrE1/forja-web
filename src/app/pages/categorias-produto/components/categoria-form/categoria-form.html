@@ -1,0 +1,37 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="section-card">
+    <h2 class="section-title">Dados da Categoria</h2>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label> Nome </label>
+
+        <input type="text" formControlName="nome" />
+
+        @if (form.controls.nome.invalid && form.controls.nome.touched) {
+          <small> Nome é obrigatório. </small>
+        }
+      </div>
+
+      <div class="form-group form-group-large">
+        <label> Descrição </label>
+
+        <textarea rows="4" formControlName="descricao"> </textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="checkbox-group">
+      <input type="checkbox" formControlName="ativo" />
+
+      <label> Categoria ativa </label>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-secondary" type="button" onclick="history.back()">Voltar</button>
+
+    <button class="btn-primary" type="submit">Salvar</button>
+  </div>
+</form>

@@ -1,0 +1,35 @@
+<div class="page-header">
+  <div>
+    <h1>Raias</h1>
+
+    <p class="subtitulo">Gestão das raias do FORJA</p>
+  </div>
+
+  <a routerLink="/raias/novo" class="btn-primary"> Nova Raia </a>
+</div>
+
+<div class="filtros">
+  <input
+    type="text"
+    placeholder="Pesquisar raia..."
+    [(ngModel)]="termoPesquisa"
+    (input)="pesquisar()"
+  />
+</div>
+
+<app-raia-list [raias]="raiasPaginadas"> </app-raia-list>
+
+<div class="pagination">
+  <button type="button" (click)="paginaAnterior()" [disabled]="paginaAtual === 1">Anterior</button>
+
+  <span>
+    Página
+    {{ paginaAtual }}
+    de
+    {{ totalPaginas }}
+  </span>
+
+  <button type="button" (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginas">
+    Próxima
+  </button>
+</div>
