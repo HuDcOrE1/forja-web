@@ -1,0 +1,41 @@
+.full-width {
+  width: 100%;
+
+  display: block;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.produto-option {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.15rem;
+
+  padding: 0.25rem 0;
+}
+
+.codigo {
+  font-size: 0.75rem;
+
+  color: #6b7280;
+
+  font-weight: 600;
+}
+
+.nome {
+  font-size: 0.95rem;
+
+  font-weight: 600;
+
+  color: #111827;
+}
+
+.estoque {
+  font-size: 0.75rem;
+
+  color: #16a34a;
+}

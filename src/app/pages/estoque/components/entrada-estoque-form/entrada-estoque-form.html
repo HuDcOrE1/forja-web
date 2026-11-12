@@ -1,0 +1,63 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="section-card">
+    <h2 class="section-title">Entrada de Estoque</h2>
+
+    <div class="form-grid">
+      <div class="form-group full-width">
+        <label> Pesquisar Produto </label>
+
+        <app-produto-autocomplete
+          [produtos]="produtos"
+          (produtoSelecionado)="selecionarProduto($event)"
+        >
+        </app-produto-autocomplete>
+      </div>
+
+      <div class="form-group">
+        <label> Quantidade </label>
+
+        <input type="number" min="1" formControlName="quantidade" />
+
+        @if (form.controls.quantidade.invalid && form.controls.quantidade.touched) {
+          <small> Quantidade deve ser maior que zero. </small>
+        }
+      </div>
+
+      @if (produtoSelecionado) {
+        <div class="produto-card">
+          <div>
+            <strong>Código:</strong>
+            {{ produtoSelecionado.codigo }}
+          </div>
+
+          <div>
+            <strong>Produto:</strong>
+            {{ produtoSelecionado.nome }}
+          </div>
+
+          <div>
+            <strong>Estoque Atual:</strong>
+            {{ produtoSelecionado.estoqueAtual }}
+          </div>
+
+          <div>
+            <strong>Estoque Mínimo:</strong>
+            {{ produtoSelecionado.estoqueMinimo }}
+          </div>
+        </div>
+      }
+
+      <div class="form-group full-width">
+        <label> Observação </label>
+
+        <textarea rows="4" formControlName="observacao"> </textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn-secondary" onclick="history.back()">Voltar</button>
+
+    <button type="submit" class="btn-primary">Registrar Entrada</button>
+  </div>
+</form>

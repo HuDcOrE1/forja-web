@@ -29,6 +29,9 @@ import { RaiaDetailsPageComponent } from './pages/raias/raia-details-page/raia-d
 import { AgendamentoFormPageComponent } from './pages/agendamentos/agendamento-form-page/agendamento-form-page';
 import { AgendamentoDetailsPageComponent } from './pages/agendamentos/agendamento-details-page/agendamento-details-page';
 import { AgendamentosComponent } from './pages/agendamentos/agendamentos';
+import { SaidaEstoquePageComponent } from './pages/estoque/saida-estoque-page/saida-estoque-page';
+import { EntradaEstoquePageComponent } from './pages/estoque/entrada-estoque-page/entrada-estoque-page';
+import { EstoqueComponent } from './pages/estoque/estoque';
 
 export const routes: Routes = [
   {
@@ -151,6 +154,22 @@ export const routes: Routes = [
       {
         path: 'agendamentos/:id/editar',
         component: AgendamentoFormPageComponent,
+      },
+
+      /* ESTOQUE */
+      {
+        path: 'estoque',
+        component: EstoqueComponent,
+      },
+
+      {
+        path: 'estoque/entrada',
+        component: EntradaEstoquePageComponent,
+      },
+
+      {
+        path: 'estoque/saida',
+        component: SaidaEstoquePageComponent,
       },
     ],
   },

@@ -1,0 +1,26 @@
+<mat-form-field appearance="outline" class="full-width">
+  <mat-label> Pesquisar Produto </mat-label>
+
+  <input matInput type="text" [(ngModel)]="filtro" [matAutocomplete]="auto" />
+
+  <mat-autocomplete #auto="matAutocomplete">
+    @for (produto of produtosFiltrados; track produto.id) {
+      <mat-option [value]="produto.codigo + ' - ' + produto.nome" (click)="selecionar(produto)">
+        <div class="produto-option">
+          <div class="codigo">
+            {{ produto.codigo }}
+          </div>
+
+          <div class="nome">
+            {{ produto.nome }}
+          </div>
+
+          <div class="estoque">
+            Estoque:
+            {{ produto.estoqueAtual }}
+          </div>
+        </div>
+      </mat-option>
+    }
+  </mat-autocomplete>
+</mat-form-field>

@@ -1,0 +1,15 @@
+<div class="page-header">
+  <div>
+    <h1>Controle de Estoque</h1>
+
+    <p class="subtitulo">Entradas, saídas e histórico</p>
+  </div>
+
+  <div class="acoes">
+    <a routerLink="/estoque/entrada" class="btn-primary"> Entrada </a>
+
+    <a routerLink="/estoque/saida" class="btn-secondary"> Saída </a>
+  </div>
+</div>
+
+<app-historico-estoque-list [movimentacoes]="movimentacoes"> </app-historico-estoque-list>
