@@ -1,0 +1,65 @@
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Cliente</th>
+
+        <th>Raia</th>
+
+        <th>Início</th>
+
+        <th>Fim</th>
+
+        <th>Status</th>
+
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (agendamento of agendamentos; track agendamento.id) {
+        <tr>
+          <td>
+            {{ agendamento.cliente }}
+          </td>
+
+          <td>
+            {{ agendamento.raia }}
+          </td>
+
+          <td>
+            {{ agendamento.dataInicio | date: 'dd/MM/yyyy HH:mm' }}
+          </td>
+
+          <td>
+            {{ agendamento.dataFim | date: 'dd/MM/yyyy HH:mm' }}
+          </td>
+
+          <td>
+            @if (agendamento.status === 'AGENDADO') {
+              <span class="status-agendado"> Agendado </span>
+            } @else if (agendamento.status === 'FINALIZADO') {
+              <span class="status-finalizado"> Finalizado </span>
+            } @else {
+              <span class="status-cancelado"> Cancelado </span>
+            }
+          </td>
+
+          <td>
+            <div class="acoes">
+              <a class="btn-icon" [routerLink]="['/agendamentos', agendamento.id, 'editar']">
+                Editar
+              </a>
+
+              <a class="btn-icon" [routerLink]="['/agendamentos', agendamento.id]"> Detalhes </a>
+            </div>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="6" class="sem-dados">Nenhum agendamento encontrado.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

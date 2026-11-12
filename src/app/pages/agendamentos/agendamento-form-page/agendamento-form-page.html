@@ -1,0 +1,15 @@
+<div class="header">
+  <div>
+    <h1>
+      @if (editando) {
+        Editar Agendamento
+      } @else {
+        Novo Agendamento
+      }
+    </h1>
+  </div>
+
+  <a routerLink="/agendamentos" class="btn-voltar"> Voltar </a>
+</div>
+
+<app-agendamento-form [agendamento]="agendamento" (salvar)="salvar($event)"> </app-agendamento-form>

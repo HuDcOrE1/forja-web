@@ -1,0 +1,69 @@
+@if (agendamento) {
+  <div class="details-container">
+    <div class="details-header">
+      <h2>Dados do Agendamento</h2>
+    </div>
+
+    <div class="details-grid">
+      <div class="detail-item">
+        <label> ID </label>
+
+        <span>
+          {{ agendamento.id }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label> Cliente </label>
+
+        <span>
+          {{ agendamento.cliente }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label> Raia </label>
+
+        <span>
+          {{ agendamento.raia }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label> Data/Hora Início </label>
+
+        <span>
+          {{ agendamento.dataInicio | date: 'dd/MM/yyyy HH:mm' }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label> Data/Hora Fim </label>
+
+        <span>
+          {{ agendamento.dataFim | date: 'dd/MM/yyyy HH:mm' }}
+        </span>
+      </div>
+
+      <div class="detail-item">
+        <label> Status </label>
+
+        @if (agendamento.status === 'AGENDADO') {
+          <span class="status-agendado"> Agendado </span>
+        } @else if (agendamento.status === 'FINALIZADO') {
+          <span class="status-finalizado"> Finalizado </span>
+        } @else {
+          <span class="status-cancelado"> Cancelado </span>
+        }
+      </div>
+
+      <div class="detail-item full-width">
+        <label> Observação </label>
+
+        <span>
+          {{ agendamento.observacao || '-' }}
+        </span>
+      </div>
+    </div>
+  </div>
+}

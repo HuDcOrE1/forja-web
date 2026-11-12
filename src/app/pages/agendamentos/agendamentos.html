@@ -1,0 +1,35 @@
+<div class="page-header">
+  <div>
+    <h1>Agendamentos</h1>
+
+    <p class="subtitulo">Gestão de reservas das raias</p>
+  </div>
+
+  <a routerLink="/agendamentos/novo" class="btn-primary"> Novo Agendamento </a>
+</div>
+
+<div class="filtros">
+  <input
+    type="text"
+    placeholder="Pesquisar agendamento..."
+    [(ngModel)]="termoPesquisa"
+    (input)="pesquisar()"
+  />
+</div>
+
+<app-agendamento-list [agendamentos]="agendamentosPaginados"> </app-agendamento-list>
+
+<div class="pagination">
+  <button type="button" (click)="paginaAnterior()" [disabled]="paginaAtual === 1">Anterior</button>
+
+  <span>
+    Página
+    {{ paginaAtual }}
+    de
+    {{ totalPaginas }}
+  </span>
+
+  <button type="button" (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginas">
+    Próxima
+  </button>
+</div>

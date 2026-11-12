@@ -1,0 +1,75 @@
+.details-container {
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 1.5rem;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.details-header {
+  margin-bottom: 1.5rem;
+}
+
+.details-header h2 {
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 1.5rem;
+
+  font-weight: 700;
+}
+
+.details-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+  gap: 1rem;
+}
+
+.detail-item {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.35rem;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.detail-item label {
+  font-size: 0.85rem;
+
+  font-weight: 600;
+
+  color: #6b7280;
+}
+
+.detail-item span {
+  color: #111827;
+
+  font-size: 1rem;
+}
+
+.status-agendado {
+  color: #ca8a04;
+
+  font-weight: 700;
+}
+
+.status-finalizado {
+  color: #16a34a;
+
+  font-weight: 700;
+}
+
+.status-cancelado {
+  color: #dc2626;
+
+  font-weight: 700;
+}
