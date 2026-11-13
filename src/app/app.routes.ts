@@ -32,6 +32,7 @@ import { AgendamentosComponent } from './pages/agendamentos/agendamentos';
 import { SaidaEstoquePageComponent } from './pages/estoque/saida-estoque-page/saida-estoque-page';
 import { EntradaEstoquePageComponent } from './pages/estoque/entrada-estoque-page/entrada-estoque-page';
 import { EstoqueComponent } from './pages/estoque/estoque';
+import { RelatoriosComponent } from './pages/relatorios/relatorios';
 
 export const routes: Routes = [
   {
@@ -170,6 +171,12 @@ export const routes: Routes = [
       {
         path: 'estoque/saida',
         component: SaidaEstoquePageComponent,
+      },
+
+      /* RELATÓRIOS */
+      {
+        path: 'relatorios',
+        component: RelatoriosComponent,
       },
     ],
   },

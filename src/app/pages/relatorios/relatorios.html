@@ -1,0 +1,313 @@
+<header class="page-header">
+  <div>
+    <h1>Relatórios</h1>
+    <p class="subtitulo">Consulte vendas, estoque, clientes, agendamentos e raias.</p>
+  </div>
+</header>
+
+<nav class="abas" aria-label="Tipos de relatório">
+  <button
+    type="button"
+    [class.ativa]="tipoRelatorio === 'vendas'"
+    (click)="selecionarRelatorio('vendas')"
+  >
+    Vendas
+  </button>
+  <button
+    type="button"
+    [class.ativa]="tipoRelatorio === 'estoque'"
+    (click)="selecionarRelatorio('estoque')"
+  >
+    Estoque
+  </button>
+  <button
+    type="button"
+    [class.ativa]="tipoRelatorio === 'clientes'"
+    (click)="selecionarRelatorio('clientes')"
+  >
+    Clientes
+  </button>
+  <button
+    type="button"
+    [class.ativa]="tipoRelatorio === 'agendamentos'"
+    (click)="selecionarRelatorio('agendamentos')"
+  >
+    Agendamentos
+  </button>
+  <button
+    type="button"
+    [class.ativa]="tipoRelatorio === 'raias'"
+    (click)="selecionarRelatorio('raias')"
+  >
+    Raias
+  </button>
+</nav>
+
+@if (erroOpcoes) {
+  <p class="mensagem erro" role="alert">{{ erroOpcoes }}</p>
+}
+
+@if (
+  tipoRelatorio === 'vendas' || tipoRelatorio === 'estoque' || tipoRelatorio === 'agendamentos'
+) {
+  <form class="filtros" (ngSubmit)="aplicarFiltros()">
+    @if (tipoRelatorio === 'vendas') {
+      <label>
+        Cliente
+        <select name="clienteId" [(ngModel)]="clienteId">
+          <option [ngValue]="null">Todos</option>
+          @for (cliente of clientesDisponiveis; track cliente.id) {
+            <option [ngValue]="cliente.id">{{ cliente.nome }}</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        Forma de pagamento
+        <select name="formaPagamento" [(ngModel)]="formaPagamento">
+          <option value="">Todas</option>
+          @for (forma of formasPagamento; track forma) {
+            <option [value]="forma">{{ forma }}</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        Status
+        <select name="statusVenda" [(ngModel)]="statusVenda">
+          <option value="">Todos</option>
+          @for (status of statusVendas; track status) {
+            <option [value]="status">{{ status }}</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        Início
+        <input type="date" name="inicio" [(ngModel)]="inicio" (change)="fecharCalendario($event)" />
+      </label>
+
+      <label>
+        Fim
+        <input type="date" name="fim" [(ngModel)]="fim" (change)="fecharCalendario($event)" />
+      </label>
+    }
+
+    @if (tipoRelatorio === 'estoque') {
+      <label>
+        Categoria
+        <select name="categoriaId" [(ngModel)]="categoriaId">
+          <option [ngValue]="null">Todas</option>
+          @for (categoria of categoriasDisponiveis; track categoria.id) {
+            <option [ngValue]="categoria.id">{{ categoria.nome }}</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        Estoque mínimo
+        <input type="number" min="0" name="estoqueMinimo" [(ngModel)]="estoqueMinimo" />
+      </label>
+    }
+
+    @if (tipoRelatorio === 'agendamentos') {
+      <label>
+        Cliente
+        <select name="clienteAgendamentoId" [(ngModel)]="clienteAgendamentoId">
+          <option [ngValue]="null">Todos</option>
+          @for (cliente of clientesDisponiveis; track cliente.id) {
+            <option [ngValue]="cliente.id">{{ cliente.nome }}</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        Raia
+        <select name="raiaId" [(ngModel)]="raiaId">
+          <option [ngValue]="null">Todas</option>
+          @for (raia of raiasDisponiveis; track raia.id) {
+            <option [ngValue]="raia.id">{{ raia.descricao }}</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        Status
+        <input type="text" name="statusAgendamento" [(ngModel)]="statusAgendamento" />
+      </label>
+    }
+
+    <button class="btn-primary" type="submit">Aplicar filtros</button>
+  </form>
+}
+
+@if (tipoRelatorio === 'vendas' || tipoRelatorio === 'estoque') {
+  <section class="exportacao" aria-label="Exportar relatório">
+    <span>Exportar todos os registros — a API não aplica os filtros ao arquivo.</span>
+    <button type="button" (click)="exportar('csv')" [disabled]="exportando">CSV</button>
+    <button type="button" (click)="exportar('xlsx')" [disabled]="exportando">Excel</button>
+    <button type="button" (click)="exportar('pdf')" [disabled]="exportando">PDF</button>
+  </section>
+}
+
+@if (erro) {
+  <p class="mensagem erro" role="alert">{{ erro }}</p>
+}
+
+@if (carregando) {
+  <p class="mensagem" role="status">Carregando relatório...</p>
+} @else {
+  @if (tipoRelatorio === 'vendas') {
+    <div class="tabela-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Venda</th>
+            <th>Data</th>
+            <th>Cliente</th>
+            <th>Usuário</th>
+            <th>Pagamento</th>
+            <th>Status</th>
+            <th class="numero">Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (venda of vendas; track venda.vendaId) {
+            <tr>
+              <td>{{ venda.vendaId }}</td>
+              <td>{{ venda.dataVenda | date: 'dd/MM/yyyy HH:mm' }}</td>
+              <td>{{ venda.cliente || 'Não informado' }}</td>
+              <td>{{ venda.usuario }}</td>
+              <td>{{ venda.formaPagamento }}</td>
+              <td>{{ venda.status }}</td>
+              <td class="numero">
+                {{ venda.valorTotal | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="7" class="vazio">Nenhuma venda encontrada.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  @if (tipoRelatorio === 'estoque') {
+    <div class="tabela-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Produto</th>
+            <th class="numero">Estoque</th>
+            <th class="numero">Valor de venda</th>
+            <th class="numero">Valor total em estoque</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of estoque; track item.produtoId) {
+            <tr>
+              <td>{{ item.codigo }}</td>
+              <td>{{ item.produto }}</td>
+              <td class="numero">{{ item.estoque }}</td>
+              <td class="numero">
+                {{ item.valorVenda | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+              </td>
+              <td class="numero">
+                {{ item.valorTotalEstoque | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5" class="vazio">Nenhum produto encontrado.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  @if (tipoRelatorio === 'clientes' && clientes) {
+    <section class="indicadores">
+      <article>
+        <span>Total de clientes</span><strong>{{ clientes.totalClientes }}</strong>
+      </article>
+      <article>
+        <span>Clientes ativos</span><strong>{{ clientes.clientesAtivos }}</strong>
+      </article>
+      <article>
+        <span>Clientes inativos</span><strong>{{ clientes.clientesInativos }}</strong>
+      </article>
+    </section>
+  }
+
+  @if (tipoRelatorio === 'agendamentos') {
+    <div class="tabela-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Raia</th>
+            <th>Início</th>
+            <th>Fim</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (agendamento of agendamentos; track agendamento.id) {
+            <tr>
+              <td>{{ agendamento.cliente }}</td>
+              <td>{{ agendamento.raia }}</td>
+              <td>{{ agendamento.inicio | date: 'dd/MM/yyyy HH:mm' }}</td>
+              <td>{{ agendamento.fim | date: 'dd/MM/yyyy HH:mm' }}</td>
+              <td>{{ agendamento.status }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5" class="vazio">Nenhum agendamento encontrado.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  @if (tipoRelatorio === 'raias') {
+    <div class="tabela-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Raia</th>
+            <th class="numero">Agendamentos</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (raia of raias; track raia.raiaId) {
+            <tr>
+              <td>{{ raia.raia }}</td>
+              <td class="numero">{{ raia.quantidadeAgendamentos }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="2" class="vazio">Nenhuma raia encontrada.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+}
+
+@if (temPaginacao) {
+  <nav class="paginacao" aria-label="Paginação do relatório">
+    <button type="button" (click)="paginaAnterior()" [disabled]="paginaAtual === 0 || carregando">
+      Anterior
+    </button>
+    <span>Página {{ paginaAtual + 1 }}</span>
+    <button type="button" (click)="proximaPagina()" [disabled]="!temProximaPagina || carregando">
+      Próxima
+    </button>
+  </nav>
+}
