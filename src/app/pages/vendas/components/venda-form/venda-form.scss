@@ -1,0 +1,469 @@
+:host {
+  display: block;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.venda-layout {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.venda-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.section-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  margin: 0 0 1rem;
+  color: #111827;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: #374151;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+}
+
+.item-card {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.item-total {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: white;
+  font-weight: 700;
+  color: #374151;
+}
+
+.alerta {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #fee2e2;
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.financeiro-card {
+  position: sticky;
+  top: 20px;
+
+  background: #0f172a;
+  color: white;
+
+  border-radius: 16px;
+
+  padding: 1.5rem;
+
+  overflow: hidden;
+}
+
+.financeiro-card h3 {
+  margin: 0 0 1.5rem;
+
+  font-size: 1.2rem;
+
+  font-weight: 700;
+}
+
+.financeiro-linha {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 1rem;
+}
+
+.financeiro-linha strong {
+  font-size: 1rem;
+}
+
+.financeiro-status {
+  margin-top: 1rem;
+
+  padding: 1rem;
+
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  font-weight: 700;
+}
+
+.financeiro-status.ok {
+  color: #22c55e;
+}
+
+.resumo-financeiro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.resumo-financeiro hr {
+  border: none;
+
+  border-top: 1px solid #d1d5db;
+
+  margin: 0.5rem 0;
+}
+
+.saldo-ok {
+  color: #22c55e;
+
+  font-weight: 700;
+
+  font-size: 1.1rem;
+}
+
+.saldo-pendente {
+  color: #ef4444;
+
+  font-weight: 700;
+
+  font-size: 1.1rem;
+}
+
+.btn-primary {
+  border: none;
+
+  border-radius: 10px;
+
+  background: #f59e0b;
+
+  color: white;
+
+  padding: 0.75rem 1rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.btn-primary:hover {
+  background: #d97706;
+}
+
+.btn-danger {
+  border: none;
+
+  border-radius: 10px;
+
+  background: #dc2626;
+
+  color: white;
+
+  padding: 0.6rem 1rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+.btn-finalizar {
+  width: 100%;
+
+  margin-top: 1.5rem;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: #f59e0b;
+
+  color: white;
+
+  padding: 1rem;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.btn-finalizar:hover {
+  background: #d97706;
+}
+
+.actions {
+  display: flex;
+
+  justify-content: flex-end;
+}
+
+@media (max-width: 1200px) {
+  .venda-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .financeiro-card {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 1rem;
+  }
+
+  .btn-primary,
+  .btn-danger,
+  .btn-finalizar {
+    width: 100%;
+  }
+}
+
+/* ==========================
+   TABELA DE ITENS
+========================== */
+
+.itens-header {
+  display: grid;
+
+  grid-template-columns:
+    4fr
+    80px
+    140px
+    100px
+    140px
+    50px;
+
+  gap: 1rem;
+
+  padding: 0.75rem 1rem;
+
+  margin-bottom: 0.75rem;
+
+  border-bottom: 2px solid #e5e7eb;
+
+  font-weight: 700;
+
+  color: #374151;
+}
+
+.item-row {
+  display: grid;
+
+  grid-template-columns:
+    4fr
+    80px
+    140px
+    100px
+    140px
+    50px;
+
+  gap: 1rem;
+
+  align-items: center;
+
+  padding: 1rem;
+
+  margin-bottom: 0.75rem;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 12px;
+
+  background: #f8fafc;
+}
+
+.pagamento-row {
+  grid-template-columns:
+    2fr
+    180px
+    50px;
+}
+
+.item-row select,
+.item-row input {
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+.cell-info {
+  font-weight: 600;
+
+  color: #374151;
+}
+
+.cell-money {
+  font-weight: 700;
+
+  color: #111827;
+}
+
+/* ==========================
+   CARD FINANCEIRO
+========================== */
+
+.financeiro-principal {
+  text-align: center;
+
+  margin-bottom: 1.5rem;
+
+  padding-bottom: 1rem;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.valor-principal {
+  font-size: 2rem;
+
+  font-weight: 800;
+
+  line-height: 1.2;
+}
+
+.valor-legenda {
+  opacity: 0.8;
+
+  font-size: 0.9rem;
+
+  margin-top: 0.5rem;
+}
+
+.financeiro-form {
+  margin-top: 1.5rem;
+
+  padding-top: 1.5rem;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.financeiro-form .form-group label {
+  color: white;
+}
+
+.financeiro-form input {
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+/* ==========================
+   RESPONSIVO
+========================== */
+
+@media (max-width: 992px) {
+  .itens-header {
+    display: none;
+  }
+
+  .item-row,
+  .pagamento-row {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+}
+
+.btn-danger {
+  width: 42px;
+
+  height: 42px;
+
+  padding: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+.produto-resumo {
+  font-size: 0.85rem;
+
+  color: #6b7280;
+
+  margin-top: 0.25rem;
+}
+.produto-resumo {
+  font-size: 0.85rem;
+
+  color: #6b7280;
+
+  margin-top: 0.25rem;
+}

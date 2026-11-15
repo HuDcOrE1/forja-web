@@ -1,0 +1,200 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="venda-layout">
+    <div class="venda-main">
+      <!-- CLIENTE -->
+
+      <div class="section-card">
+        <h2 class="section-title">Cliente</h2>
+
+        <div class="form-group">
+          <app-cliente-lookup (clienteSelecionado)="selecionarCliente($event)">
+          </app-cliente-lookup>
+
+          @if (form.controls.clienteId.invalid && form.controls.clienteId.touched) {
+            <small class="erro-campo"> Cliente é obrigatório. </small>
+          }
+        </div>
+      </div>
+
+      <!-- ITENS -->
+
+      <div class="section-card">
+        <div class="section-header">
+          <h2 class="section-title">Itens da Venda</h2>
+
+          <button type="button" class="btn-primary" (click)="adicionarItem()">
+            Adicionar Item
+          </button>
+        </div>
+
+        <div class="itens-header">
+          <div>Produto</div>
+
+          <div>Estoque</div>
+
+          <div>Unitário</div>
+
+          <div>Qtd</div>
+
+          <div>Subtotal</div>
+
+          <div></div>
+        </div>
+
+        <div formArrayName="itens">
+          @for (item of itens.controls; track $index) {
+            <div class="item-row" [formGroupName]="$index">
+              <app-produto-lookup (produtoSelecionado)="selecionarProduto($index, $event)">
+              </app-produto-lookup>
+              <div class="produto-resumo">
+                Estoque:
+
+                {{ getEstoqueAtual($index) }}
+              </div>
+
+              <div class="produto-resumo">
+                Valor Unitário:
+
+                {{ getValorUnitario($index) | currency: 'BRL' }}
+              </div>
+
+              <div class="cell-info">
+                {{ getEstoqueAtual($index) }}
+              </div>
+
+              <div class="cell-money">
+                {{ getValorUnitario($index) | currency: 'BRL' }}
+              </div>
+
+              <input type="number" min="1" formControlName="quantidade" />
+
+              <div class="cell-money">
+                {{ calcularSubtotal($index) | currency: 'BRL' }}
+              </div>
+
+              <button type="button" class="btn-danger" (click)="removerItem($index)">✕</button>
+            </div>
+
+            @if (!estoqueSuficiente($index)) {
+              <div class="alerta">Estoque insuficiente.</div>
+            }
+          }
+        </div>
+      </div>
+
+      <!-- PAGAMENTOS -->
+
+      <div class="section-card">
+        <div class="section-header">
+          <h2 class="section-title">Pagamentos</h2>
+
+          <button type="button" class="btn-primary" (click)="adicionarPagamento()">
+            Adicionar Pagamento
+          </button>
+        </div>
+
+        <div class="itens-header">
+          <div>Forma de Pagamento</div>
+
+          <div>Valor</div>
+
+          <div></div>
+        </div>
+
+        <div formArrayName="pagamentos">
+          @for (pagamento of pagamentos.controls; track $index) {
+            <div class="item-row pagamento-row" [formGroupName]="$index">
+              <select formControlName="formaPagamento">
+                @for (forma of formasPagamento; track forma) {
+                  <option [value]="forma">
+                    {{ forma }}
+                  </option>
+                }
+              </select>
+
+              <input
+                type="text"
+                formControlName="valor"
+                (input)="aplicarMascaraPagamento($event, $index)"
+              />
+
+              <button type="button" class="btn-danger" (click)="removerPagamento($index)">✕</button>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- RESUMO FINANCEIRO -->
+
+    <aside class="financeiro-card">
+      <h3>Resumo Financeiro</h3>
+
+      <div class="financeiro-principal">
+        <div class="valor-principal">
+          {{ valorLiquido | currency: 'BRL' }}
+        </div>
+
+        <div class="valor-legenda">Valor Líquido da Venda</div>
+      </div>
+
+      <div class="financeiro-linha">
+        <span>Valor Bruto</span>
+
+        <strong>
+          {{ valorBruto | currency: 'BRL' }}
+        </strong>
+      </div>
+
+      <div class="financeiro-linha">
+        <span>Total Pago</span>
+
+        <strong>
+          {{ totalPagamentos | currency: 'BRL' }}
+        </strong>
+      </div>
+
+      <div class="financeiro-linha">
+        <span>Saldo Restante</span>
+
+        <strong [class.saldo-ok]="pagamentoCompleto" [class.saldo-pendente]="!pagamentoCompleto">
+          {{ saldoRestante | currency: 'BRL' }}
+        </strong>
+      </div>
+
+      <div class="financeiro-status" [class.ok]="pagamentoCompleto">
+        @if (pagamentoCompleto) {
+          🟢 Pagamento Completo
+        } @else {
+          🔴 Faltam
+
+          {{ saldoRestante | currency: 'BRL' }}
+        }
+      </div>
+
+      <div class="financeiro-form">
+        <div class="form-group">
+          <label> Desconto </label>
+
+          <input
+            type="text"
+            formControlName="valorDesconto"
+            (input)="aplicarMascaraDesconto($event)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label> Acréscimo </label>
+
+          <input
+            type="text"
+            formControlName="valorAcrescimo"
+            (input)="aplicarMascaraAcrescimo($event)"
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="btn-finalizar">Finalizar Venda</button>
+    </aside>
+  </div>
+</form>

@@ -1,0 +1,58 @@
+<div class="lookup">
+  <input
+    type="text"
+    [(ngModel)]="termo"
+    (input)="pesquisar()"
+    placeholder="Pesquisar produto por nome ou código..."
+  />
+
+  @if (produtos.length > 0) {
+    <div class="resultado-lista">
+      @for (produto of produtos; track produto.id) {
+        <div class="resultado-item" (click)="selecionar(produto)">
+          <div class="nome">
+            {{ produto.nome }}
+          </div>
+
+          <div class="dados">
+            {{ produto.codigo }}
+          </div>
+
+          <div class="dados">
+            Estoque:
+            {{ produto.estoqueAtual }}
+          </div>
+
+          <div class="dados">
+            {{ produto.valorVenda | currency: 'BRL' }}
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  @if (produto) {
+    <div class="produto-selecionado">
+      <strong> Produto Selecionado </strong>
+
+      <div>
+        {{ produto.nome }}
+      </div>
+
+      <div>
+        Código:
+        {{ produto.codigo }}
+      </div>
+
+      <div>
+        Estoque:
+        {{ produto.estoqueAtual }}
+      </div>
+
+      <div>
+        Valor:
+        {{ produto.valorVenda | currency: 'BRL' }}
+      </div>
+    </div>
+  }
+</div>

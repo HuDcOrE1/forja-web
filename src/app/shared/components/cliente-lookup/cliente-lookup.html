@@ -1,0 +1,45 @@
+<div class="lookup">
+  <input
+    type="text"
+    [(ngModel)]="termo"
+    (input)="pesquisar()"
+    placeholder="Pesquisar cliente por nome ou CPF..."
+  />
+
+  @if (clientes.length > 0) {
+    <div class="resultado-lista">
+      @for (cliente of clientes; track cliente.id) {
+        <div class="resultado-item" (click)="selecionar(cliente)">
+          <div class="nome">
+            {{ cliente.nome }}
+          </div>
+
+          <div class="dados">
+            CPF:
+            {{ cliente.cpf }}
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  @if (cliente) {
+    <div class="cliente-selecionado">
+      <strong> Cliente Selecionado </strong>
+
+      <div>
+        {{ cliente.nome }}
+      </div>
+
+      <div>
+        CPF:
+        {{ cliente.cpf }}
+      </div>
+
+      <div>
+        CR:
+        {{ cliente.cr }}
+      </div>
+    </div>
+  }
+</div>

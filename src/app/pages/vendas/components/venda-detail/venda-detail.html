@@ -1,0 +1,25 @@
+@if (venda) {
+  <div class="card">
+    <h2>Venda #{{ venda.id }}</h2>
+
+    <p>
+      Cliente:
+      {{ venda.cliente }}
+    </p>
+
+    <p>
+      Vendedor:
+      {{ venda.usuario }}
+    </p>
+
+    <p>
+      Valor Líquido:
+      {{ venda.valorLiquido | currency: 'BRL' }}
+    </p>
+
+    <p>
+      Status:
+      {{ venda.status }}
+    </p>
+  </div>
+}

@@ -1,0 +1,83 @@
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+
+        <th>Cliente</th>
+
+        <th>Vendedor</th>
+
+        <th>Valor Bruto</th>
+
+        <th>Desconto</th>
+
+        <th>Acréscimo</th>
+
+        <th>Valor Líquido</th>
+
+        <th>Status</th>
+
+        <th>Data</th>
+
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (venda of vendas; track venda.id) {
+        <tr>
+          <td>
+            {{ venda.id }}
+          </td>
+
+          <td>
+            {{ venda.cliente }}
+          </td>
+
+          <td>
+            {{ venda.usuario }}
+          </td>
+
+          <td>
+            {{ venda.valorBruto | currency: 'BRL' }}
+          </td>
+
+          <td>
+            {{ venda.valorDesconto | currency: 'BRL' }}
+          </td>
+
+          <td>
+            {{ venda.valorAcrescimo | currency: 'BRL' }}
+          </td>
+
+          <td>
+            {{ venda.valorLiquido | currency: 'BRL' }}
+          </td>
+
+          <td>
+            @if (venda.status === 'FINALIZADA') {
+              <span class="status-finalizada"> FINALIZADA </span>
+            } @else {
+              <span class="status-cancelada"> CANCELADA </span>
+            }
+          </td>
+
+          <td>
+            {{ venda.criadoEm | date: 'dd/MM/yyyy HH:mm' }}
+          </td>
+
+          <td>
+            <div class="acoes">
+              <a class="btn-icon" [routerLink]="['/vendas', venda.id]"> Detalhes </a>
+            </div>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="10" class="sem-dados">Nenhuma venda encontrada.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

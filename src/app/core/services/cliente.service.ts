@@ -34,4 +34,11 @@ export class ClienteService {
   inativar(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API}/${id}`);
   }
+  pesquisar(termo: string): Observable<ClienteResponse[]> {
+    return this.http.get<ClienteResponse[]>(`${this.API}/pesquisa`, {
+      params: {
+        termo,
+      },
+    });
+  }
 }

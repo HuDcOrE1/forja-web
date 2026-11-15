@@ -7,9 +7,9 @@ import { DashboardComponent } from './pages/dashboard/dashboard';
 import { authGuard } from './core/guards/auth.guard';
 import { MainLayoutComponent } from './layout/main-layout/main-layout';
 
+import { ClienteFormPageComponent } from './pages/clientes/cliente-form-page/cliente-form-page';
 import { ClientesComponent } from './pages/clientes/clientes';
 import { ClienteDetailsPageComponent } from './pages/clientes/components/cliente-details-page/cliente-details-page';
-import { ClienteFormPageComponent } from './pages/clientes/cliente-form-page/cliente-form-page';
 import { ProdutosComponent } from './pages/produtos/produtos';
 
 import { ProdutoDetailsPageComponent } from './pages/produtos/produto-details-page/produto-details-page';
@@ -25,14 +25,17 @@ import { RaiasComponent } from './pages/raias/raias';
 
 import { RaiaFormPageComponent } from './pages/raias/raia-form-page/raia-form-page';
 
-import { RaiaDetailsPageComponent } from './pages/raias/raia-details-page/raia-details-page';
-import { AgendamentoFormPageComponent } from './pages/agendamentos/agendamento-form-page/agendamento-form-page';
 import { AgendamentoDetailsPageComponent } from './pages/agendamentos/agendamento-details-page/agendamento-details-page';
+import { AgendamentoFormPageComponent } from './pages/agendamentos/agendamento-form-page/agendamento-form-page';
 import { AgendamentosComponent } from './pages/agendamentos/agendamentos';
-import { SaidaEstoquePageComponent } from './pages/estoque/saida-estoque-page/saida-estoque-page';
 import { EntradaEstoquePageComponent } from './pages/estoque/entrada-estoque-page/entrada-estoque-page';
 import { EstoqueComponent } from './pages/estoque/estoque';
+import { SaidaEstoquePageComponent } from './pages/estoque/saida-estoque-page/saida-estoque-page';
+import { RaiaDetailsPageComponent } from './pages/raias/raia-details-page/raia-details-page';
 import { RelatoriosComponent } from './pages/relatorios/relatorios';
+import { VendaFormPageComponent } from './pages/vendas/venda-form-page/venda-form-page';
+import { VendasComponent } from './pages/vendas/vendas';
+import { VendaDetailsPageComponent } from './pages/vendas/venda-details-page/venda-details-page';
 
 export const routes: Routes = [
   {
@@ -177,6 +180,22 @@ export const routes: Routes = [
       {
         path: 'relatorios',
         component: RelatoriosComponent,
+      },
+      /* VENDAS */
+
+      {
+        path: 'vendas',
+        component: VendasComponent,
+      },
+
+      {
+        path: 'vendas/nova',
+        component: VendaFormPageComponent,
+      },
+
+      {
+        path: 'vendas/:id',
+        component: VendaDetailsPageComponent,
       },
     ],
   },

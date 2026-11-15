@@ -37,4 +37,12 @@ export class ProdutoService {
   inativar(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API}/${id}`);
   }
+
+  pesquisar(termo: string): Observable<ProdutoResponse[]> {
+    return this.http.get<ProdutoResponse[]>(`${this.API}/pesquisa`, {
+      params: {
+        termo,
+      },
+    });
+  }
 }
