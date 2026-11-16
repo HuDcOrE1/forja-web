@@ -154,9 +154,13 @@ export class RelatoriosComponent implements OnInit {
   }
 
   private carregarOpcoes(): void {
-    this.clienteService.listar().subscribe({
-      next: (clientes) => (this.clientesDisponiveis = clientes),
-      error: () => (this.erroOpcoes = 'Não foi possível carregar a lista de clientes.'),
+    this.clienteService.listar(0, 100, undefined, true).subscribe({
+      next: (response) => {
+        this.clientesDisponiveis = response.content;
+      },
+      error: () => {
+        this.erroOpcoes = 'Não foi possível carregar a lista de clientes.';
+      },
     });
 
     this.raiaService.listar().subscribe({

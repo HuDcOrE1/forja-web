@@ -10,6 +10,8 @@ import { ProdutoRequest } from '../models/produto-request';
 
 import { ProdutoResponse } from '../models/produto-response';
 
+import { PageResponse } from '../models/page-response';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -18,8 +20,28 @@ export class ProdutoService {
 
   private readonly API = `${environment.apiUrl}/produtos`;
 
-  listar(): Observable<ProdutoResponse[]> {
-    return this.http.get<ProdutoResponse[]>(this.API);
+  listar(
+    page = 0,
+    size = 20,
+    termo?: string,
+    statusEstoque?: string,
+  ): Observable<PageResponse<ProdutoResponse>> {
+    const params: Record<string, string> = {
+      page: String(page),
+      size: String(size),
+    };
+
+    if (termo?.trim()) {
+      params['termo'] = termo;
+    }
+
+    if (statusEstoque) {
+      params['statusEstoque'] = statusEstoque;
+    }
+
+    return this.http.get<PageResponse<ProdutoResponse>>(this.API, {
+      params,
+    });
   }
 
   obterPorId(id: number): Observable<ProdutoResponse> {
@@ -36,13 +58,5 @@ export class ProdutoService {
 
   inativar(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API}/${id}`);
-  }
-
-  pesquisar(termo: string): Observable<ProdutoResponse[]> {
-    return this.http.get<ProdutoResponse[]>(`${this.API}/pesquisa`, {
-      params: {
-        termo,
-      },
-    });
   }
 }

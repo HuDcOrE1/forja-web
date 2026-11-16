@@ -12,6 +12,8 @@ import { ProdutoService } from '../../core/services/produto.service';
 
 import { ProdutoListComponent } from './components/produto-list/produto-list';
 
+import { PageResponse } from '../../core/models/page-response';
+
 @Component({
   selector: 'app-produtos',
   standalone: true,
@@ -24,69 +26,64 @@ export class ProdutosComponent implements OnInit {
 
   produtos: ProdutoResponse[] = [];
 
-  produtosFiltrados: ProdutoResponse[] = [];
-
   termoPesquisa = '';
 
-  paginaAtual = 1;
+  statusEstoque = '';
 
-  itensPorPagina = 10;
+  paginaAtual = 0;
+
+  itensPorPagina = 20;
+
+  totalPaginas = 0;
+
+  totalElementos = 0;
 
   ngOnInit(): void {
     this.carregarProdutos();
   }
 
-  private carregarProdutos(): void {
-    this.produtoService.listar().subscribe((response: ProdutoResponse[]) => {
-      this.produtos = response;
+  carregarProdutos(): void {
+    this.produtoService
+      .listar(
+        this.paginaAtual,
+        this.itensPorPagina,
+        this.termoPesquisa,
+        this.statusEstoque || undefined,
+      )
+      .subscribe((response: PageResponse<ProdutoResponse>) => {
+        this.produtos = response.content;
 
-      this.produtosFiltrados = [...response];
-    });
+        this.totalPaginas = response.totalPages;
+
+        this.totalElementos = response.totalElements;
+      });
   }
 
   pesquisar(): void {
-    const termo = this.termoPesquisa.trim().toLowerCase();
+    this.paginaAtual = 0;
 
-    if (!termo) {
-      this.produtosFiltrados = [...this.produtos];
-
-      this.paginaAtual = 1;
-
-      return;
-    }
-
-    this.produtosFiltrados = this.produtos.filter(
-      (produto) =>
-        produto.nome.toLowerCase().includes(termo) ||
-        produto.codigo.toLowerCase().includes(termo) ||
-        produto.categoriaNome.toLowerCase().includes(termo) ||
-        (produto.marca ?? '').toLowerCase().includes(termo),
-    );
-
-    this.paginaAtual = 1;
+    this.carregarProdutos();
   }
 
-  get produtosPaginados(): ProdutoResponse[] {
-    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
+  filtrarStatus(): void {
+    this.paginaAtual = 0;
 
-    const fim = inicio + this.itensPorPagina;
-
-    return this.produtosFiltrados.slice(inicio, fim);
-  }
-
-  get totalPaginas(): number {
-    return Math.max(1, Math.ceil(this.produtosFiltrados.length / this.itensPorPagina));
+    this.carregarProdutos();
   }
 
   paginaAnterior(): void {
-    if (this.paginaAtual > 1) {
+    if (this.paginaAtual > 0) {
       this.paginaAtual--;
+
+      this.carregarProdutos();
     }
   }
 
   proximaPagina(): void {
-    if (this.paginaAtual < this.totalPaginas) {
+    if (this.paginaAtual < this.totalPaginas - 1) {
       this.paginaAtual++;
+
+      this.carregarProdutos();
     }
   }
 }

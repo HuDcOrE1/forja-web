@@ -8,6 +8,8 @@ import { ProdutoResponse } from '../../../../core/models/produto-response';
 
 import { ProdutoService } from '../../../../core/services/produto.service';
 
+import { PageResponse } from '../../../../core/models/page-response';
+
 @Component({
   selector: 'app-saida-estoque-form',
   standalone: true,
@@ -38,8 +40,8 @@ export class SaidaEstoqueFormComponent implements OnInit {
   }
 
   private carregarProdutos(): void {
-    this.produtoService.listar().subscribe((produtos) => {
-      this.produtos = produtos;
+    this.produtoService.listar(0, 100).subscribe((response: PageResponse<ProdutoResponse>) => {
+      this.produtos = response.content;
     });
   }
 

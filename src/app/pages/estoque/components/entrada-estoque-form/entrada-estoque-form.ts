@@ -42,8 +42,8 @@ export class EntradaEstoqueFormComponent implements OnInit {
   }
 
   private carregarProdutos(): void {
-    this.produtoService.listar().subscribe((produtos) => {
-      this.produtos = produtos;
+    this.produtoService.listar(0, 100).subscribe((pagina) => {
+      this.produtos = pagina.content;
     });
   }
 

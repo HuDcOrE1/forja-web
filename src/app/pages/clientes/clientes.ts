@@ -8,6 +8,8 @@ import { RouterLink } from '@angular/router';
 
 import { ClienteResponse } from '../../core/models/cliente-response';
 
+import { PageResponse } from '../../core/models/page-response';
+
 import { ClienteService } from '../../core/services/cliente.service';
 
 import { ClienteListComponent } from './components/cliente-list/cliente-list';
@@ -24,68 +26,61 @@ export class ClientesComponent implements OnInit {
 
   clientes: ClienteResponse[] = [];
 
-  clientesFiltrados: ClienteResponse[] = [];
-
   termoPesquisa = '';
 
-  paginaAtual = 1;
+  ativo: string = 'true';
 
-  itensPorPagina = 10;
+  paginaAtual = 0;
+
+  itensPorPagina = 20;
+
+  totalPaginas = 0;
+
+  totalElementos = 0;
 
   ngOnInit(): void {
     this.carregarClientes();
   }
 
-  private carregarClientes(): void {
-    this.clienteService.listar().subscribe((response: ClienteResponse[]) => {
-      this.clientes = response;
+  carregarClientes(): void {
+    const filtroAtivo = this.ativo === '' ? undefined : this.ativo === 'true';
 
-      this.clientesFiltrados = [...response];
-    });
+    this.clienteService
+      .listar(this.paginaAtual, this.itensPorPagina, this.termoPesquisa, filtroAtivo)
+      .subscribe((response: PageResponse<ClienteResponse>) => {
+        this.clientes = response.content;
+
+        this.totalPaginas = response.totalPages;
+
+        this.totalElementos = response.totalElements;
+      });
   }
 
   pesquisar(): void {
-    const termo = this.termoPesquisa.trim().toLowerCase();
+    this.paginaAtual = 0;
 
-    if (!termo) {
-      this.clientesFiltrados = [...this.clientes];
-
-      this.paginaAtual = 1;
-
-      return;
-    }
-
-    this.clientesFiltrados = this.clientes.filter(
-      (cliente) =>
-        cliente.nome.toLowerCase().includes(termo) ||
-        cliente.cpf.includes(termo) ||
-        cliente.email.toLowerCase().includes(termo),
-    );
-
-    this.paginaAtual = 1;
+    this.carregarClientes();
   }
 
-  get clientesPaginados(): ClienteResponse[] {
-    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
+  filtrarStatus(): void {
+    this.paginaAtual = 0;
 
-    const fim = inicio + this.itensPorPagina;
-
-    return this.clientesFiltrados.slice(inicio, fim);
-  }
-
-  get totalPaginas(): number {
-    return Math.max(1, Math.ceil(this.clientesFiltrados.length / this.itensPorPagina));
+    this.carregarClientes();
   }
 
   paginaAnterior(): void {
-    if (this.paginaAtual > 1) {
+    if (this.paginaAtual > 0) {
       this.paginaAtual--;
+
+      this.carregarClientes();
     }
   }
 
   proximaPagina(): void {
-    if (this.paginaAtual < this.totalPaginas) {
+    if (this.paginaAtual < this.totalPaginas - 1) {
       this.paginaAtual++;
+
+      this.carregarClientes();
     }
   }
 }

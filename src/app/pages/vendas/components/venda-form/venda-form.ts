@@ -82,14 +82,14 @@ export class VendaFormComponent implements OnInit {
   }
 
   private carregarClientes(): void {
-    this.clienteService.listar().subscribe((clientes) => {
-      this.clientes = clientes;
+    this.clienteService.listar(0, 100, undefined, true).subscribe((pagina) => {
+      this.clientes = pagina.content;
     });
   }
 
   private carregarProdutos(): void {
-    this.produtoService.listar().subscribe((produtos) => {
-      this.produtos = produtos.filter((p) => p.ativo);
+    this.produtoService.listar(0, 100).subscribe((pagina) => {
+      this.produtos = pagina.content;
     });
   }
 

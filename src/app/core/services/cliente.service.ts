@@ -5,7 +5,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../environment/environment';
+
 import { ClienteResponse } from '../models/cliente-response';
+
+import { PageResponse } from '../models/page-response';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +18,28 @@ export class ClienteService {
 
   private readonly API = `${environment.apiUrl}/clientes`;
 
-  listar(): Observable<ClienteResponse[]> {
-    return this.http.get<ClienteResponse[]>(this.API);
+  listar(
+    page = 0,
+    size = 20,
+    termo?: string,
+    ativo?: boolean,
+  ): Observable<PageResponse<ClienteResponse>> {
+    const params: Record<string, string> = {
+      page: String(page),
+      size: String(size),
+    };
+
+    if (termo?.trim()) {
+      params['termo'] = termo;
+    }
+
+    if (ativo !== undefined) {
+      params['ativo'] = String(ativo);
+    }
+
+    return this.http.get<PageResponse<ClienteResponse>>(this.API, {
+      params,
+    });
   }
 
   obterPorId(id: number): Observable<ClienteResponse> {
@@ -33,12 +56,5 @@ export class ClienteService {
 
   inativar(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API}/${id}`);
-  }
-  pesquisar(termo: string): Observable<ClienteResponse[]> {
-    return this.http.get<ClienteResponse[]>(`${this.API}/pesquisa`, {
-      params: {
-        termo,
-      },
-    });
   }
 }

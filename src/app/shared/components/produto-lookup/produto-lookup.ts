@@ -10,6 +10,8 @@ import { ProdutoResponse } from '../../../core/models/produto-response';
 
 import { ProdutoService } from '../../../core/services/produto.service';
 
+import { PageResponse } from '../../../core/models/page-response';
+
 @Component({
   selector: 'app-produto-lookup',
   standalone: true,
@@ -32,16 +34,18 @@ export class ProdutoLookupComponent {
   private readonly pesquisa$ = new Subject<string>();
 
   constructor() {
-    this.pesquisa$.pipe(debounceTime(300), distinctUntilChanged()).subscribe((termo) => {
+    this.pesquisa$.pipe(debounceTime(300), distinctUntilChanged()).subscribe((termo: string) => {
       if (termo.length < 2) {
         this.produtos = [];
 
         return;
       }
 
-      this.produtoService.pesquisar(termo).subscribe((resultado) => {
-        this.produtos = resultado;
-      });
+      this.produtoService
+        .listar(0, 10, termo)
+        .subscribe((resultado: PageResponse<ProdutoResponse>) => {
+          this.produtos = resultado.content;
+        });
     });
   }
 

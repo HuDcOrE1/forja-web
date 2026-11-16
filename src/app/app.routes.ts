@@ -35,7 +35,7 @@ import { RaiaDetailsPageComponent } from './pages/raias/raia-details-page/raia-d
 import { RelatoriosComponent } from './pages/relatorios/relatorios';
 import { VendaFormPageComponent } from './pages/vendas/venda-form-page/venda-form-page';
 import { VendasComponent } from './pages/vendas/vendas';
-import { VendaDetailsPageComponent } from './pages/vendas/venda-details-page/venda-details-page';
+import { VendaDetailsPageComponent } from './pages/vendas/components/venda-details-page/venda-details-page';
 
 export const routes: Routes = [
   {

@@ -1,25 +1,181 @@
 @if (venda) {
-  <div class="card">
-    <h2>Venda #{{ venda.id }}</h2>
+  <div class="venda-page">
+    <!-- HEADER -->
 
-    <p>
-      Cliente:
-      {{ venda.cliente }}
-    </p>
+    <div class="header-card">
+      <div>
+        <h1>Venda #{{ venda.id }}</h1>
 
-    <p>
-      Vendedor:
-      {{ venda.usuario }}
-    </p>
+        <div class="status">
+          @if (venda.status === 'FINALIZADA') {
+            <span class="status-finalizada"> FINALIZADA </span>
+          } @else {
+            <span class="status-cancelada"> CANCELADA </span>
+          }
+        </div>
+      </div>
 
-    <p>
-      Valor Líquido:
-      {{ venda.valorLiquido | currency: 'BRL' }}
-    </p>
+      <div class="valor-card">
+        <span> Valor Líquido </span>
 
-    <p>
-      Status:
-      {{ venda.status }}
-    </p>
+        <strong>
+          {{ venda.valorLiquido | currency: 'BRL' }}
+        </strong>
+      </div>
+    </div>
+
+    <!-- DADOS GERAIS -->
+
+    <div class="grid-duplo">
+      <div class="section-card">
+        <h2>Cliente</h2>
+
+        <div class="info">
+          <strong>Nome:</strong>
+
+          {{ venda.cliente }}
+        </div>
+
+        <div class="info">
+          <strong>ID Cliente:</strong>
+
+          {{ venda.clienteId }}
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2>Financeiro</h2>
+
+        <div class="info">
+          <strong>Valor Bruto:</strong>
+
+          {{ venda.valorBruto | currency: 'BRL' }}
+        </div>
+
+        <div class="info">
+          <strong>Desconto:</strong>
+
+          {{ venda.valorDesconto | currency: 'BRL' }}
+        </div>
+
+        <div class="info">
+          <strong>Acréscimo:</strong>
+
+          {{ venda.valorAcrescimo | currency: 'BRL' }}
+        </div>
+
+        <div class="info destaque">
+          <strong>Valor Líquido:</strong>
+
+          {{ venda.valorLiquido | currency: 'BRL' }}
+        </div>
+      </div>
+    </div>
+    <!-- ITENS -->
+
+    <div class="section-card">
+      <h2>Itens da Venda</h2>
+
+      <table class="tabela">
+        <thead>
+          <tr>
+            <th>Produto</th>
+
+            <th>Quantidade</th>
+
+            <th>Valor Unitário</th>
+
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (item of venda.itens; track item.produtoId) {
+            <tr>
+              <td>
+                {{ item.produto }}
+              </td>
+
+              <td>
+                {{ item.quantidade }}
+              </td>
+
+              <td>
+                {{ item.valorUnitario | currency: 'BRL' }}
+              </td>
+
+              <td>
+                {{ item.subtotal | currency: 'BRL' }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PAGAMENTOS -->
+
+    <div class="section-card">
+      <h2>Pagamentos</h2>
+
+      <table class="tabela">
+        <thead>
+          <tr>
+            <th>Forma de Pagamento</th>
+
+            <th>Valor</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (pagamento of venda.pagamentos; track pagamento.formaPagamento) {
+            <tr>
+              <td>
+                {{ pagamento.formaPagamento }}
+              </td>
+
+              <td>
+                {{ pagamento.valor | currency: 'BRL' }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- AUDITORIA -->
+
+    <div class="section-card">
+      <h2>Auditoria</h2>
+
+      <div class="info">
+        <strong>Vendedor:</strong>
+
+        {{ venda.usuario }}
+      </div>
+
+      <div class="info">
+        <strong>Status:</strong>
+
+        {{ venda.status }}
+      </div>
+
+      <div class="info">
+        <strong>Data da Venda:</strong>
+
+        {{ venda.criadoEm | date: 'dd/MM/yyyy HH:mm' }}
+      </div>
+
+      @if (podeCancelar && venda.status === 'FINALIZADA') {
+        <div class="acoes-venda">
+          <button type="button" class="btn-cancelar-venda" (click)="solicitarCancelamento()">
+            Cancelar Venda
+          </button>
+        </div>
+      }
+    </div>
+    <div class="actions">
+      <button class="btn-primary" type="button" onclick="history.back()">Voltar</button>
+    </div>
   </div>
 }

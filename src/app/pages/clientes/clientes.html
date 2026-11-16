@@ -1,32 +1,60 @@
 <div class="page-header">
   <div>
     <h1>Clientes</h1>
+
     <p class="subtitulo">Gestão de clientes do FORJA</p>
   </div>
+
   <a routerLink="/clientes/novo" class="btn-primary"> Novo Cliente </a>
 </div>
 
 <div class="filtros">
-  <input
-    type="text"
-    placeholder="Pesquisar cliente..."
-    [(ngModel)]="termoPesquisa"
-    (input)="pesquisar()"
-  />
+  <div class="filtros-grid">
+    <input
+      type="text"
+      placeholder="Pesquisar cliente por nome, CPF, email ou CR..."
+      [(ngModel)]="termoPesquisa"
+      (keyup.enter)="pesquisar()"
+    />
+
+    <select [(ngModel)]="ativo" (change)="filtrarStatus()">
+      <option value="true">Ativos</option>
+
+      <option value="false">Inativos</option>
+
+      <option value="">Todos</option>
+    </select>
+
+    <button type="button" class="btn-primary" (click)="pesquisar()">Pesquisar</button>
+  </div>
 </div>
 
 <div class="table-container">
-  <app-cliente-list [clientes]="clientesPaginados"> </app-cliente-list>
+  <app-cliente-list [clientes]="clientes"> </app-cliente-list>
 </div>
 
 <div class="pagination">
-  <button type="button" (click)="paginaAnterior()" [disabled]="paginaAtual === 1">Anterior</button>
+  <button type="button" (click)="paginaAnterior()" [disabled]="paginaAtual === 0">Anterior</button>
+
   <span>
-    Página {{ paginaAtual }}
+    Página
+
+    {{ paginaAtual + 1 }}
+
     de
+
     {{ totalPaginas }}
   </span>
-  <button type="button" (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginas">
+
+  <button type="button" (click)="proximaPagina()" [disabled]="paginaAtual >= totalPaginas - 1">
     Próxima
   </button>
+</div>
+
+<div class="resultado-info">
+  Total de registros:
+
+  <strong>
+    {{ totalElementos }}
+  </strong>
 </div>

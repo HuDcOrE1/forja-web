@@ -57,7 +57,7 @@ export class ClienteFormPageComponent implements OnInit {
         },
 
         error: (erro) => {
-          const mensagem = erro?.error?.errors?.[0] ?? 'Erro ao atualizar cliente.';
+          const mensagem = erro?.error?.erro ?? 'Erro ao atualizar cliente.';
 
           this.toastService.error(mensagem);
         },

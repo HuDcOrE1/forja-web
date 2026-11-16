@@ -1,10 +1,10 @@
 .lookup {
+  width: 100%;
   position: relative;
 }
 
 .lookup input {
   width: 100%;
-
   box-sizing: border-box;
 
   padding: 0.85rem 1rem;
@@ -12,6 +12,18 @@
   border: 1px solid #d1d5db;
 
   border-radius: 10px;
+
+  font-size: 0.95rem;
+
+  background: white;
+}
+
+.lookup input:focus {
+  outline: none;
+
+  border-color: #f59e0b;
+
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
 }
 
 .resultado-lista {
@@ -41,6 +53,14 @@
   padding: 0.75rem 1rem;
 
   cursor: pointer;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.25rem;
+
+  transition: 0.2s;
 }
 
 .resultado-item:hover {
@@ -49,10 +69,13 @@
 
 .nome {
   font-weight: 700;
+
+  color: #111827;
 }
 
 .dados {
   color: #6b7280;
+
   font-size: 0.85rem;
 }
 
@@ -66,4 +89,22 @@
   background: #ecfdf5;
 
   border: 1px solid #34d399;
+}
+
+.cliente-selecionado strong {
+  display: block;
+
+  margin-bottom: 0.5rem;
+}
+
+.cliente-selecionado div {
+  margin-bottom: 0.25rem;
+
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .resultado-lista {
+    max-height: 200px;
+  }
 }

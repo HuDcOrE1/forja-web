@@ -10,27 +10,32 @@ import { ClienteResponse } from '../../../../core/models/cliente-response';
 
 import { RaiaResponse } from '../../../../core/models/raia-response';
 
-import { ClienteService } from '../../../../core/services/cliente.service';
-
 import { RaiaService } from '../../../../core/services/raia.service';
+
+import { ClienteLookupComponent } from '../../../../shared/components/cliente-lookup/cliente-lookup';
+
+import { ToastService } from '../../../../shared/services/toast.service';
+import { ClienteService } from '../../../../core/services/cliente.service';
 
 @Component({
   selector: 'app-agendamento-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ClienteLookupComponent],
   templateUrl: './agendamento-form.html',
   styleUrl: './agendamento-form.scss',
 })
 export class AgendamentoFormComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
 
-  private readonly clienteService = inject(ClienteService);
-
   private readonly raiaService = inject(RaiaService);
 
-  clientes: ClienteResponse[] = [];
+  private readonly toastService = inject(ToastService);
+
+  private readonly clienteService = inject(ClienteService);
 
   raias: RaiaResponse[] = [];
+
+  clienteSelecionado?: ClienteResponse;
 
   private _agendamento?: AgendamentoResponse;
 
@@ -44,14 +49,14 @@ export class AgendamentoFormComponent implements OnInit {
 
     this.form.patchValue({
       clienteId: value.clienteId,
-
       raiaId: value.raiaId,
-
       dataInicio: this.formatarData(value.dataInicio),
-
       dataFim: this.formatarData(value.dataFim),
-
       observacao: value.observacao,
+    });
+
+    this.clienteService.obterPorId(value.clienteId).subscribe((cliente) => {
+      this.clienteSelecionado = cliente;
     });
   }
 
@@ -63,9 +68,9 @@ export class AgendamentoFormComponent implements OnInit {
   salvar = new EventEmitter<any>();
 
   form = this.fb.group({
-    clienteId: [null as number | null, Validators.required],
+    clienteId: this.fb.control<number | null>(null, Validators.required),
 
-    raiaId: [null as number | null, Validators.required],
+    raiaId: this.fb.control<number | null>(null, Validators.required),
 
     dataInicio: ['', Validators.required],
 
@@ -75,15 +80,17 @@ export class AgendamentoFormComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.carregarClientes();
-
     this.carregarRaias();
   }
 
-  private carregarClientes(): void {
-    this.clienteService.listar().subscribe((response: ClienteResponse[]) => {
-      this.clientes = response;
+  selecionarCliente(cliente: ClienteResponse): void {
+    this.clienteSelecionado = cliente;
+
+    this.form.patchValue({
+      clienteId: cliente.id,
     });
+
+    this.form.controls.clienteId.markAsTouched();
   }
 
   private carregarRaias(): void {
@@ -93,6 +100,30 @@ export class AgendamentoFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if (!this.form.value.clienteId) {
+      this.toastService.error('Selecione um cliente.');
+
+      return;
+    }
+
+    if (!this.form.value.raiaId) {
+      this.toastService.error('Selecione uma raia.');
+
+      return;
+    }
+
+    if (!this.form.value.dataInicio) {
+      this.toastService.error('Informe a data de início.');
+
+      return;
+    }
+
+    if (!this.form.value.dataFim) {
+      this.toastService.error('Informe a data de fim.');
+
+      return;
+    }
+
     if (this.form.invalid) {
       this.form.markAllAsTouched();
 

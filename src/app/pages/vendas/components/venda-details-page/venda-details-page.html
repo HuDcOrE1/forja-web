@@ -1,0 +1,15 @@
+@if (carregando) {
+  <p>Carregando...</p>
+}
+
+@if (!carregando && venda) {
+  <app-venda-detail [venda]="venda" (cancelar)="abrirCancelamento()"> </app-venda-detail>
+}
+
+@if (exibirDialogCancelamento) {
+  <app-venda-cancelamento-dialog
+    (cancelar)="fecharCancelamento()"
+    (confirmar)="confirmarCancelamento($event)"
+  >
+  </app-venda-cancelamento-dialog>
+}

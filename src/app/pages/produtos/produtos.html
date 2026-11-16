@@ -9,26 +9,52 @@
 </div>
 
 <div class="filtros">
-  <input
-    type="text"
-    placeholder="Pesquisar produto..."
-    [(ngModel)]="termoPesquisa"
-    (input)="pesquisar()"
-  />
+  <div class="filtros-grid">
+    <input
+      type="text"
+      placeholder="Pesquisar produto por nome ou código..."
+      [(ngModel)]="termoPesquisa"
+      (keyup.enter)="pesquisar()"
+    />
+
+    <select [(ngModel)]="statusEstoque" (change)="filtrarStatus()">
+      <option value="">Todos</option>
+
+      <option value="SAUDAVEL">Saudável</option>
+
+      <option value="CRITICO">Crítico</option>
+
+      <option value="SEM_ESTOQUE">Sem Estoque</option>
+    </select>
+
+    <button type="button" class="btn-primary" (click)="pesquisar()">Pesquisar</button>
+  </div>
 </div>
 
-<app-produto-list [produtos]="produtosPaginados"> </app-produto-list>
+<app-produto-list [produtos]="produtos"> </app-produto-list>
 
 <div class="pagination">
-  <button type="button" (click)="paginaAnterior()" [disabled]="paginaAtual === 1">Anterior</button>
+  <button type="button" (click)="paginaAnterior()" [disabled]="paginaAtual === 0">Anterior</button>
 
   <span>
-    Página {{ paginaAtual }}
+    Página
+
+    {{ paginaAtual + 1 }}
+
     de
+
     {{ totalPaginas }}
   </span>
 
-  <button type="button" (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginas">
+  <button type="button" (click)="proximaPagina()" [disabled]="paginaAtual >= totalPaginas - 1">
     Próxima
   </button>
+</div>
+
+<div class="resultado-info">
+  Total de registros:
+
+  <strong>
+    {{ totalElementos }}
+  </strong>
 </div>

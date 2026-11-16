@@ -1,9 +1,273 @@
-.card {
+:host {
+  display: block;
+}
+
+.venda-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.header-card {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+
+  color: white;
+
+  border-radius: 16px;
+
+  padding: 1.5rem 2rem;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.header-card h1 {
+  margin: 0;
+
+  font-size: 2rem;
+
+  font-weight: 700;
+}
+
+.status {
+  margin-top: 0.75rem;
+}
+
+.status-finalizada {
+  display: inline-block;
+
+  background: #16a34a;
+
+  color: white;
+
+  padding: 0.35rem 0.75rem;
+
+  border-radius: 999px;
+
+  font-size: 0.8rem;
+
+  font-weight: 700;
+}
+
+.status-cancelada {
+  display: inline-block;
+
+  background: #dc2626;
+
+  color: white;
+
+  padding: 0.35rem 0.75rem;
+
+  border-radius: 999px;
+
+  font-size: 0.8rem;
+
+  font-weight: 700;
+}
+
+.valor-card {
+  text-align: right;
+}
+
+.valor-card span {
+  display: block;
+
+  opacity: 0.85;
+
+  font-size: 0.9rem;
+}
+
+.valor-card strong {
+  font-size: 2rem;
+
+  font-weight: 800;
+}
+
+/* ==========================
+   GRID SUPERIOR
+========================== */
+
+.grid-duplo {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 1.5rem;
+}
+
+/* ==========================
+   CARDS
+========================== */
+
+.section-card {
   background: white;
 
-  border-radius: 12px;
+  border-radius: 16px;
 
   padding: 1.5rem;
 
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.section-card h2 {
+  margin: 0 0 1rem;
+
+  color: #111827;
+
+  font-size: 1.2rem;
+
+  font-weight: 700;
+}
+
+.info {
+  margin-bottom: 0.75rem;
+
+  color: #374151;
+
+  font-size: 0.95rem;
+}
+
+.destaque {
+  margin-top: 1rem;
+
+  color: #111827;
+
+  font-size: 1.05rem;
+
+  font-weight: 700;
+}
+
+/* ==========================
+   TABELAS
+========================== */
+
+.tabela {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+.tabela thead {
+  background: #f8fafc;
+}
+
+.tabela th {
+  text-align: left;
+
+  padding: 0.9rem;
+
+  color: #374151;
+
+  font-weight: 700;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tabela td {
+  padding: 0.9rem;
+
+  border-bottom: 1px solid #f1f5f9;
+
+  color: #475569;
+}
+
+.tabela tbody tr:hover {
+  background: #fafafa;
+}
+
+/* ==========================
+   RESPONSIVO
+========================== */
+
+@media (max-width: 992px) {
+  .header-card {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 1rem;
+  }
+
+  .valor-card {
+    text-align: left;
+  }
+
+  .grid-duplo {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .tabela {
+    display: block;
+
+    overflow-x: auto;
+  }
+}
+
+.acoes-venda {
+  margin-top: 1.5rem;
+
+  padding-top: 1rem;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+.btn-cancelar-venda {
+  border: none;
+
+  border-radius: 10px;
+
+  background: #dc2626;
+
+  color: white;
+
+  padding: 0.85rem 1.25rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.btn-cancelar-venda:hover {
+  background: #b91c1c;
+}
+
+.actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 1rem;
+}
+
+.btn-primary {
+  border: none;
+
+  border-radius: 8px;
+
+  padding: 0.75rem 1.25rem;
+
+  background: #f59e0b;
+
+  color: white;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition: 0.2s;
 }

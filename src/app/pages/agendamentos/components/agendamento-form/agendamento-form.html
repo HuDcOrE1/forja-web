@@ -6,15 +6,11 @@
       <div class="form-group">
         <label> Cliente </label>
 
-        <select formControlName="clienteId">
-          <option [ngValue]="null">Selecione...</option>
-
-          @for (cliente of clientes; track cliente.id) {
-            <option [ngValue]="cliente.id">
-              {{ cliente.nome }}
-            </option>
-          }
-        </select>
+        <app-cliente-lookup
+          [cliente]="clienteSelecionado"
+          (clienteSelecionado)="selecionarCliente($event)"
+        >
+        </app-cliente-lookup>
       </div>
 
       <div class="form-group">

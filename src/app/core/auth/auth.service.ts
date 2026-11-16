@@ -89,4 +89,38 @@ export class AuthService {
 
     return expiration.getTime() <= Date.now();
   }
+
+  getRoles(): string[] {
+    const token = this.getToken();
+
+    if (!token) {
+      return [];
+    }
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+
+      return payload.roles ?? [];
+    } catch {
+      return [];
+    }
+  }
+
+  hasRole(...roles: string[]): boolean {
+    const userRoles = this.getRoles();
+
+    return roles.some((role) => userRoles.includes(role));
+  }
+
+  isAdmin(): boolean {
+    return this.hasRole('ROLE_ADMIN');
+  }
+
+  isGerente(): boolean {
+    return this.hasRole('ROLE_GERENTE');
+  }
+
+  isAtendente(): boolean {
+    return this.hasRole('ROLE_ATENDENTE');
+  }
 }

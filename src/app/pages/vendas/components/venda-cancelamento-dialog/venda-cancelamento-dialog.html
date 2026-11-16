@@ -1,1 +1,27 @@
-<p>venda-cancelamento-dialog works!</p>
+<div class="overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Cancelar Venda</h2>
+    </div>
+
+    <form [formGroup]="form">
+      <div class="modal-body">
+        <p>Informe o motivo do cancelamento.</p>
+
+        <textarea rows="5" formControlName="motivo"> </textarea>
+
+        @if (form.controls.motivo.invalid && form.controls.motivo.touched) {
+          <small class="erro"> Motivo é obrigatório. </small>
+        }
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" (click)="fechar()">Fechar</button>
+
+        <button type="button" class="btn-danger" (click)="confirmarCancelamento()">
+          Confirmar Cancelamento
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
