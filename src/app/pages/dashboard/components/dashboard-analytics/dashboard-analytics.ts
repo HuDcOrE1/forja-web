@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 
 import { BaseChartDirective } from 'ng2-charts';
@@ -11,19 +12,30 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrl: './dashboard-analytics.scss',
 })
 export class DashboardAnalyticsComponent {
-  @Input() faturamentoDiarioChart: any;
+  @Input()
+  faturamentoDiarioChart: any;
 
-  @Input() topProdutosChart: any;
+  @Input()
+  topProdutosChart: any;
 
-  @Input() topClientesChart: any;
+  @Input()
+  topClientesChart: any;
 
-  @Input() receitaCategoriaChart: any;
+  @Input()
+  receitaCategoriaChart: any;
 
-  @Input() chartOptions: any;
+  @Input()
+  financeiroChartOptions: any;
 
-  @Input() lineChartType: any;
+  @Input()
+  quantidadeChartOptions: any;
 
-  @Input() barChartType: any;
+  @Input()
+  lineChartType: any;
 
-  @Input() doughnutChartType: any;
+  @Input()
+  barChartType: any;
+
+  @Input()
+  doughnutChartType: any;
 }

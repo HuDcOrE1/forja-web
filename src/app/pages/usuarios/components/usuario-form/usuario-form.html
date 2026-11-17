@@ -1,0 +1,75 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="section-card">
+    <h2 class="section-title">Dados do Usuário</h2>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label> Nome * </label>
+
+        <input type="text" formControlName="nome" />
+
+        @if (form.controls.nome.invalid && form.controls.nome.touched) {
+          <small class="erro"> Nome é obrigatório. </small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label> Email * </label>
+
+        <input type="email" formControlName="email" />
+
+        @if (form.controls.email.invalid && form.controls.email.touched) {
+          <small class="erro"> Informe um email válido. </small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label> Senha </label>
+
+        @if (editando) {
+          <small class="senha-info"> Deixe em branco para manter a senha atual. </small>
+        }
+
+        <input type="password" formControlName="senha" />
+
+        @if (!editando && form.controls.senha.invalid && form.controls.senha.touched) {
+          <small class="erro"> Senha é obrigatória. </small>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2 class="section-title">Perfis *</h2>
+
+    <div class="perfil-grid">
+      @for (perfil of perfisDisponiveis; track perfil.id) {
+        <label class="perfil-item">
+          <input
+            type="checkbox"
+            [checked]="form.value.perfis?.includes(perfil.id)"
+            (change)="alterarPerfil(perfil.id, $any($event.target).checked)"
+          />
+
+          {{ perfil.nome }}
+        </label>
+      }
+    </div>
+
+    @if (form.controls.perfis.invalid && form.controls.perfis.touched) {
+      <small class="erro"> Selecione ao menos um perfil. </small>
+    }
+  </div>
+
+  <div class="section-card">
+    <label class="perfil-item">
+      <input type="checkbox" formControlName="ativo" />
+
+      Usuário Ativo
+    </label>
+  </div>
+
+  <div class="actions">
+    <button type="submit" class="btn-primary">Salvar</button>
+  </div>
+</form>

@@ -1,0 +1,55 @@
+@if (usuario) {
+  <div class="usuario-page">
+    <div class="header-card">
+      <div>
+        <h1>
+          {{ usuario.nome }}
+        </h1>
+
+        <div class="status">
+          @if (usuario.ativo) {
+            <span class="status-ativo"> ATIVO </span>
+          } @else {
+            <span class="status-inativo"> INATIVO </span>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-duplo">
+      <div class="section-card">
+        <h2>Dados do Usuário</h2>
+
+        <div class="info">
+          <strong>Nome:</strong>
+
+          {{ usuario.nome }}
+        </div>
+
+        <div class="info">
+          <strong>Email:</strong>
+
+          {{ usuario.email }}
+        </div>
+
+        <div class="info">
+          <strong>ID:</strong>
+
+          {{ usuario.id }}
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2>Perfis</h2>
+
+        <div class="perfil-container">
+          @for (perfil of usuario.perfis; track perfil) {
+            <span class="perfil-badge">
+              {{ perfil }}
+            </span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+}

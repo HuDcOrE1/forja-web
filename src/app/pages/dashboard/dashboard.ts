@@ -65,7 +65,44 @@ export class DashboardComponent implements OnInit {
 
   doughnutChartType: ChartType = 'doughnut';
 
-  chartOptions: ChartConfiguration['options'] = {
+  financeiroChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+
+    maintainAspectRatio: false,
+
+    plugins: {
+      legend: {
+        display: true,
+      },
+
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            return new Intl.NumberFormat('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(Number(context.raw));
+          },
+        },
+      },
+    },
+
+    scales: {
+      y: {
+        ticks: {
+          callback: (value) => {
+            return new Intl.NumberFormat('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+              maximumFractionDigits: 0,
+            }).format(Number(value));
+          },
+        },
+      },
+    },
+  };
+
+  quantidadeChartOptions: ChartConfiguration['options'] = {
     responsive: true,
 
     maintainAspectRatio: false,

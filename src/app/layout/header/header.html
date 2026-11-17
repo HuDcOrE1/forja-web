@@ -1,7 +1,27 @@
-<mat-toolbar color="primary">
-  <span>FORJA</span>
+<mat-toolbar class="header">
+  <div class="brand">
+    <!-- <img src="assets/images/logo-forja.jpeg" alt="FORJA" /> -->
 
-  <span class="spacer"></span>
+    <div>
+      <div class="titulo">FORJA</div>
 
-  <span>Sistema de Gestão</span>
+      <div class="subtitulo">Sistema de Gestão para Clube de Tiro</div>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="usuario">
+    <div class="usuario-info">
+      <div class="email">
+        {{ usuarioLogado }}
+      </div>
+
+      <!-- <div class="perfil">
+        {{ perfilAtual }}
+      </div> -->
+    </div>
+
+    <button type="button" class="btn-logout" (click)="logout()">Sair</button>
+  </div>
 </mat-toolbar>

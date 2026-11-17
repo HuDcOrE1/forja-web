@@ -1,42 +1,54 @@
 @if (raia) {
-  <div class="details-container">
-    <div class="details-header">
-      <h2>Dados da Raia</h2>
+  <div class="raia-page">
+    <div class="header-card">
+      <div>
+        <h1>Raia #{{ raia.numero }}</h1>
+
+        <div class="status">
+          @if (raia.ativa) {
+            <span class="status-ativo-badge"> ATIVA </span>
+          } @else {
+            <span class="status-inativo-badge"> INATIVA </span>
+          }
+        </div>
+      </div>
     </div>
 
-    <div class="details-grid">
-      <div class="detail-item">
-        <label> ID </label>
+    <div class="grid-duplo">
+      <div class="section-card">
+        <h2>Identificação</h2>
 
-        <span>
+        <div class="info">
+          <strong>ID:</strong>
+
           {{ raia.id }}
-        </span>
-      </div>
+        </div>
 
-      <div class="detail-item">
-        <label> Número </label>
+        <div class="info">
+          <strong>Número:</strong>
 
-        <span>
           {{ raia.numero }}
-        </span>
+        </div>
       </div>
 
-      <div class="detail-item full-width">
-        <label> Descrição </label>
+      <div class="section-card">
+        <h2>Status</h2>
 
-        <span>
-          {{ raia.descricao }}
-        </span>
+        <div class="info">
+          @if (raia.ativa) {
+            <span class="status-ativo"> Disponível para uso </span>
+          } @else {
+            <span class="status-inativo"> Indisponível </span>
+          }
+        </div>
       </div>
+    </div>
 
-      <div class="detail-item">
-        <label> Status </label>
+    <div class="section-card">
+      <h2>Descrição</h2>
 
-        @if (raia.ativa) {
-          <span class="status-ativo"> Ativa </span>
-        } @else {
-          <span class="status-inativo"> Inativa </span>
-        }
+      <div class="info">
+        {{ raia.descricao }}
       </div>
     </div>
   </div>

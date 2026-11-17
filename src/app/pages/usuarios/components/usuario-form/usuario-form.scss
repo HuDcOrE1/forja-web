@@ -1,0 +1,93 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.section-card {
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 1.5rem;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.section-title {
+  margin: 0 0 1rem;
+
+  color: #111827;
+
+  font-size: 1.2rem;
+
+  font-weight: 700;
+}
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+
+  color: #374151;
+}
+
+.form-group input {
+  border: 1px solid #d1d5db;
+
+  border-radius: 8px;
+
+  padding: 0.75rem 1rem;
+}
+
+.perfil-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 1rem;
+}
+
+.perfil-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.5rem;
+}
+
+.actions {
+  display: flex;
+
+  justify-content: flex-end;
+}
+
+.btn-primary {
+  border: none;
+
+  border-radius: 8px;
+
+  padding: 0.75rem 1.25rem;
+
+  background: #f59e0b;
+
+  color: white;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}

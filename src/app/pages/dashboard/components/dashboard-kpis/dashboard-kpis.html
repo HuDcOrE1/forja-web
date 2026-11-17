@@ -2,6 +2,7 @@
   <div class="cards">
     <div class="card">
       <h3>Clientes Ativos</h3>
+
       <p class="valor">
         {{ dashboard.clientesAtivos }}
       </p>
@@ -9,6 +10,7 @@
 
     <div class="card">
       <h3>Produtos Ativos</h3>
+
       <p class="valor">
         {{ dashboard.produtosAtivos }}
       </p>
@@ -16,22 +18,25 @@
 
     <div class="card">
       <h3>Receita Hoje</h3>
+
       <p class="valor">
-        {{ dashboard.receitaHoje }}
+        {{ dashboard.receitaHoje | currency: 'BRL' }}
       </p>
     </div>
 
     <div class="card">
       <h3>Receita Mês</h3>
+
       <p class="valor">
-        {{ dashboard.receitaMes }}
+        {{ dashboard.receitaMes | currency: 'BRL' }}
       </p>
     </div>
 
     <div class="card">
       <h3>Ticket Médio</h3>
+
       <p class="valor">
-        {{ dashboard.ticketMedio }}
+        {{ dashboard.ticketMedio | currency: 'BRL' }}
       </p>
     </div>
   </div>

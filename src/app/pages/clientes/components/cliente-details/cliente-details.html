@@ -1,124 +1,120 @@
 @if (cliente) {
-  <div class="details-container">
-    <div class="details-header">
-      <h2>Dados do Cliente</h2>
-    </div>
-
-    <div class="details-grid">
-      <div class="detail-item">
-        <label>Nome</label>
-
-        <span>
+  <div class="cliente-page">
+    <div class="header-card">
+      <div>
+        <h1>
           {{ cliente.nome }}
-        </span>
+        </h1>
+
+        <div class="badge-container">
+          @if (cliente.ativo) {
+            <span class="status-ativo-badge"> ATIVO </span>
+          } @else {
+            <span class="status-inativo-badge"> INATIVO </span>
+          }
+        </div>
       </div>
+    </div>
 
-      <div class="detail-item">
-        <label>CPF</label>
+    <div class="grid-duplo">
+      <div class="section-card">
+        <h2>Dados do Cliente</h2>
 
-        <span>
+        <div class="info">
+          <strong>Nome:</strong>
+
+          {{ cliente.nome }}
+        </div>
+
+        <div class="info">
+          <strong>CPF:</strong>
+
           {{ cliente.cpf }}
-        </span>
-      </div>
+        </div>
 
-      <div class="detail-item">
-        <label>E-mail</label>
+        <div class="info">
+          <strong>Email:</strong>
 
-        <span>
           {{ cliente.email }}
-        </span>
-      </div>
+        </div>
 
-      <div class="detail-item">
-        <label>Telefone</label>
+        <div class="info">
+          <strong>Telefone:</strong>
 
-        <span>
           {{ cliente.telefone }}
-        </span>
-      </div>
+        </div>
 
-      <div class="detail-item">
-        <label>CR</label>
+        <div class="info">
+          <strong>CR:</strong>
 
-        <span>
           {{ cliente.cr || '-' }}
-        </span>
+        </div>
       </div>
 
-      <div class="detail-item">
-        <label>Status</label>
+      <div class="section-card">
+        <h2>Situação</h2>
 
-        @if (cliente.ativo) {
-          <span class="status-ativo"> Ativo </span>
-        } @else {
-          <span class="status-inativo"> Inativo </span>
-        }
-      </div>
+        <div class="info">
+          @if (cliente.ativo) {
+            <span class="status-ativo"> Cliente ativo </span>
+          } @else {
+            <span class="status-inativo"> Cliente inativo </span>
+          }
+        </div>
 
-      <div class="detail-item">
-        <label>Data Cadastro</label>
+        <div class="info">
+          <strong>Data Cadastro:</strong>
 
-        <span>
           {{ cliente.dataCadastro }}
-        </span>
+        </div>
       </div>
     </div>
 
-    <div class="details-header">
+    <div class="section-card">
       <h2>Endereço</h2>
-    </div>
 
-    <div class="details-grid">
-      <div class="detail-item">
-        <label>CEP</label>
+      <div class="grid-endereco">
+        <div class="info">
+          <strong>CEP:</strong>
 
-        <span>
           {{ cliente.cep || '-' }}
-        </span>
-      </div>
+        </div>
 
-      <div class="detail-item">
-        <label>Logradouro</label>
+        <div class="info">
+          <strong>Logradouro:</strong>
 
-        <span>
           {{ cliente.logradouro || '-' }}
-        </span>
-      </div>
+        </div>
 
-      <div class="detail-item">
-        <label>Número</label>
+        <div class="info">
+          <strong>Número:</strong>
 
-        <span>
           {{ cliente.numero || '-' }}
-        </span>
-      </div>
+        </div>
 
-      <div class="detail-item">
-        <label>Complemento</label>
+        <div class="info">
+          <strong>Complemento:</strong>
 
-        <span>
           {{ cliente.complemento || '-' }}
-        </span>
-      </div>
+        </div>
 
-      <div class="detail-item">
-        <label>Bairro</label>
+        <div class="info">
+          <strong>Bairro:</strong>
 
-        <span>
           {{ cliente.bairro || '-' }}
-        </span>
-      </div>
+        </div>
 
-      <div class="detail-item">
-        <label>Cidade</label>
+        <div class="info">
+          <strong>Cidade:</strong>
 
-        <span>
           {{ cliente.cidade || '-' }}
-        </span>
-      </div>
+        </div>
 
-      <div class="detail-item">
-        <label>UF</label> <span> {{ cliente.uf || '-' }} </span>
+        <div class="info">
+          <strong>UF:</strong>
+
+          {{ cliente.uf || '-' }}
+        </div>
       </div>
     </div>
   </div>

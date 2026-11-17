@@ -8,7 +8,7 @@
       <canvas
         baseChart
         [data]="faturamentoDiarioChart"
-        [options]="chartOptions"
+        [options]="financeiroChartOptions"
         [type]="lineChartType"
       >
       </canvas>
@@ -19,7 +19,12 @@
     <h2>Top Produtos</h2>
 
     <div class="grafico">
-      <canvas baseChart [data]="topProdutosChart" [options]="chartOptions" [type]="barChartType">
+      <canvas
+        baseChart
+        [data]="topProdutosChart"
+        [options]="quantidadeChartOptions"
+        [type]="barChartType"
+      >
       </canvas>
     </div>
   </div>
@@ -28,7 +33,12 @@
     <h2>Top Clientes</h2>
 
     <div class="grafico">
-      <canvas baseChart [data]="topClientesChart" [options]="chartOptions" [type]="barChartType">
+      <canvas
+        baseChart
+        [data]="topClientesChart"
+        [options]="quantidadeChartOptions"
+        [type]="barChartType"
+      >
       </canvas>
     </div>
   </div>
@@ -40,7 +50,7 @@
       <canvas
         baseChart
         [data]="receitaCategoriaChart"
-        [options]="chartOptions"
+        [options]="financeiroChartOptions"
         [type]="doughnutChartType"
       >
       </canvas>

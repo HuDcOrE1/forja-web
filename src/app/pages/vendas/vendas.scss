@@ -56,14 +56,29 @@
   background: #d97706;
 }
 
+/* =====================
+   FILTROS
+===================== */
+
 .filtros {
   margin-bottom: 1.5rem;
 }
 
-.filtros input {
+.filtros-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 220px 140px;
+
+  gap: 1rem;
+
+  align-items: center;
+}
+
+.filtros-grid input,
+.filtros-grid select {
   width: 100%;
 
-  max-width: 400px;
+  box-sizing: border-box;
 
   padding: 0.75rem 1rem;
 
@@ -72,7 +87,22 @@
   border-radius: 8px;
 
   background: white;
+
+  font-size: 0.95rem;
 }
+
+.filtros-grid input:focus,
+.filtros-grid select:focus {
+  outline: none;
+
+  border-color: #f59e0b;
+
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+}
+
+/* =====================
+   PAGINAÇÃO
+===================== */
 
 .pagination {
   display: flex;
@@ -120,6 +150,34 @@
   font-weight: 600;
 }
 
+/* =====================
+   RESULTADO
+===================== */
+
+.resultado-info {
+  margin-top: 1rem;
+
+  text-align: center;
+
+  color: #4b5563;
+
+  font-size: 0.95rem;
+}
+
+.resultado-info strong {
+  color: #111827;
+}
+
+/* =====================
+   RESPONSIVO
+===================== */
+
+@media (max-width: 992px) {
+  .filtros-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .page-header {
     flex-direction: column;
@@ -127,7 +185,9 @@
     align-items: flex-start;
   }
 
-  .filtros input {
-    max-width: 100%;
+  .btn-primary {
+    width: 100%;
+
+    text-align: center;
   }
 }

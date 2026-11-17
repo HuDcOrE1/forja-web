@@ -1,0 +1,15 @@
+<div class="header">
+  <div>
+    <h1>
+      @if (editando) {
+        Editar Usuário
+      } @else {
+        Novo Usuário
+      }
+    </h1>
+  </div>
+
+  <a routerLink="/usuarios" class="btn-voltar"> Voltar </a>
+</div>
+
+<app-usuario-form [usuario]="usuario" (salvar)="salvar($event)"> </app-usuario-form>

@@ -19,7 +19,11 @@ export class DashboardStrategicComponent {
 
   @Input() conversaoOperacional: any;
 
-  @Input() chartOptions: any;
+  @Input()
+  financeiroChartOptions: any;
+
+  @Input()
+  quantidadeChartOptions: any;
 
   @Input() barChartType: any;
 

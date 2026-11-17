@@ -1,3 +1,87 @@
+.header {
+  background: #111827 !important;
+
+  color: white;
+
+  height: 72px;
+
+  padding: 0 1.5rem;
+}
+
+.brand {
+  display: flex;
+
+  align-items: center;
+
+  gap: 1rem;
+}
+
+.brand img {
+  width: 48px;
+
+  height: 48px;
+
+  border-radius: 8px;
+
+  object-fit: cover;
+}
+
+.titulo {
+  font-size: 1.4rem;
+
+  font-weight: 800;
+}
+
+.subtitulo {
+  font-size: 0.8rem;
+
+  color: #d1d5db;
+}
+
 .spacer {
   flex: 1;
+}
+
+.usuario {
+  display: flex;
+
+  align-items: center;
+
+  gap: 1rem;
+}
+
+.usuario-info {
+  text-align: right;
+}
+
+.email {
+  font-size: 0.9rem;
+}
+
+.perfil {
+  font-size: 0.75rem;
+
+  color: #f59e0b;
+
+  font-weight: 700;
+}
+
+.btn-logout {
+  border: none;
+
+  border-radius: 8px;
+
+  padding: 0.5rem 1rem;
+
+  background: #dc2626;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-weight: 700;
+}
+
+.btn-logout:hover {
+  background: #b91c1c;
 }

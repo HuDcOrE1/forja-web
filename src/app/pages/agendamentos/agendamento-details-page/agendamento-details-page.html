@@ -1,7 +1,12 @@
-<div class="header">
-  <h1>Detalhes do Agendamento</h1>
+@if (carregando) {
+  <p>Carregando...</p>
+}
 
-  <a routerLink="/agendamentos" class="btn-voltar"> Voltar </a>
-</div>
-
-<app-agendamento-details [agendamento]="agendamento"> </app-agendamento-details>
+@if (!carregando && agendamento) {
+  <app-agendamento-details
+    [agendamento]="agendamento"
+    (finalizar)="finalizar()"
+    (cancelar)="cancelar()"
+  >
+  </app-agendamento-details>
+}

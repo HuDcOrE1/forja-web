@@ -1,83 +1,172 @@
-.details-container {
+:host {
+  display: block;
+}
+
+.produto-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header-card {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+
+  color: white;
+
+  border-radius: 16px;
+
+  padding: 1.5rem 2rem;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.header-card h1 {
+  margin: 0;
+
+  font-size: 2rem;
+
+  font-weight: 700;
+}
+
+.badge-container {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 0.75rem;
+
+  margin-top: 0.75rem;
+}
+
+.status-ativo-badge,
+.status-inativo-badge,
+.status-saudavel-badge,
+.status-critico-badge,
+.status-sem-estoque-badge {
+  display: inline-block;
+
+  padding: 0.4rem 0.9rem;
+
+  border-radius: 999px;
+
+  color: white;
+
+  font-size: 0.85rem;
+
+  font-weight: 700;
+}
+
+.status-ativo-badge {
+  background: #16a34a;
+}
+
+.status-inativo-badge {
+  background: #dc2626;
+}
+
+.status-saudavel-badge {
+  background: #16a34a;
+}
+
+.status-critico-badge {
+  background: #ca8a04;
+}
+
+.status-sem-estoque-badge {
+  background: #dc2626;
+}
+
+.valor-venda-card {
+  text-align: right;
+}
+
+.valor-venda-card span {
+  display: block;
+
+  opacity: 0.85;
+}
+
+.valor-venda-card strong {
+  font-size: 2rem;
+
+  font-weight: 800;
+}
+
+.grid-duplo {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 1.5rem;
+}
+
+.section-card {
   background: white;
 
-  border-radius: 12px;
+  border-radius: 16px;
 
   padding: 1.5rem;
 
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
 }
 
-.details-header {
-  margin-bottom: 1.5rem;
-}
-
-.details-header h2 {
-  margin: 0;
+.section-card h2 {
+  margin: 0 0 1rem;
 
   color: #111827;
-}
 
-.details-grid {
-  display: grid;
-
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-
-  gap: 1rem;
-}
-
-.detail-item {
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 0.25rem;
-}
-
-.full-width {
-  grid-column: span 2;
-}
-
-.detail-item label {
-  font-size: 0.875rem;
-
-  color: #6b7280;
-
-  font-weight: 600;
-}
-
-.detail-item span {
-  color: #111827;
-
-  font-size: 1rem;
-}
-
-.status-ativo {
-  color: #16a34a;
+  font-size: 1.15rem;
 
   font-weight: 700;
 }
 
-.status-inativo {
-  color: #dc2626;
+.info {
+  margin-bottom: 0.75rem;
+
+  color: #374151;
+
+  font-size: 0.95rem;
+}
+
+.destaque {
+  font-size: 1.05rem;
 
   font-weight: 700;
 }
 
+.status-ativo,
 .status-saudavel {
   color: #16a34a;
+  font-weight: 700;
+}
 
+.status-inativo,
+.status-sem-estoque {
+  color: #dc2626;
   font-weight: 700;
 }
 
 .status-critico {
   color: #ca8a04;
-
   font-weight: 700;
 }
 
-.status-sem-estoque {
-  color: #dc2626;
+@media (max-width: 768px) {
+  .header-card {
+    flex-direction: column;
 
-  font-weight: 700;
+    align-items: flex-start;
+
+    gap: 1rem;
+  }
+
+  .grid-duplo {
+    grid-template-columns: 1fr;
+  }
 }

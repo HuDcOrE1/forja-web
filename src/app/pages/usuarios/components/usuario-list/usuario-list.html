@@ -1,0 +1,55 @@
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+
+        <th>Email</th>
+
+        <th>Perfis</th>
+
+        <th>Status</th>
+
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (usuario of usuarios; track usuario.id) {
+        <tr>
+          <td>
+            {{ usuario.nome }}
+          </td>
+
+          <td>
+            {{ usuario.email }}
+          </td>
+
+          <td>
+            {{ usuario.perfis.join(', ') }}
+          </td>
+
+          <td>
+            @if (usuario.ativo) {
+              <span class="status-ativo"> Ativo </span>
+            } @else {
+              <span class="status-inativo"> Inativo </span>
+            }
+          </td>
+
+          <td>
+            <div class="acoes">
+              <a class="btn-icon" [routerLink]="['/usuarios', usuario.id]"> Detalhes </a>
+
+              <a class="btn-icon" [routerLink]="['/usuarios', usuario.id, 'editar']"> Editar </a>
+            </div>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="5" class="sem-dados">Nenhum usuário encontrado.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

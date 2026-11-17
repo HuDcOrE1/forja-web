@@ -36,6 +36,9 @@ import { RelatoriosComponent } from './pages/relatorios/relatorios';
 import { VendaFormPageComponent } from './pages/vendas/venda-form-page/venda-form-page';
 import { VendasComponent } from './pages/vendas/vendas';
 import { VendaDetailsPageComponent } from './pages/vendas/components/venda-details-page/venda-details-page';
+import { UsuarioFormPageComponent } from './pages/usuarios/usuario-form-page/usuario-form-page';
+import { UsuarioDetailsPageComponent } from './pages/usuarios/usuario-details-page/usuario-details-page';
+import { UsuariosComponent } from './pages/usuarios/usuarios';
 
 export const routes: Routes = [
   {
@@ -196,6 +199,28 @@ export const routes: Routes = [
       {
         path: 'vendas/:id',
         component: VendaDetailsPageComponent,
+      },
+
+      /* USUÁRIOS */
+
+      {
+        path: 'usuarios',
+        component: UsuariosComponent,
+      },
+
+      {
+        path: 'usuarios/novo',
+        component: UsuarioFormPageComponent,
+      },
+
+      {
+        path: 'usuarios/:id',
+        component: UsuarioDetailsPageComponent,
+      },
+
+      {
+        path: 'usuarios/:id/editar',
+        component: UsuarioFormPageComponent,
       },
     ],
   },

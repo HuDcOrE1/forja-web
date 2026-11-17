@@ -1,110 +1,122 @@
 @if (produto) {
-  <div class="details-container">
-    <div class="details-header">
-      <h2>Dados do Produto</h2>
+  <div class="produto-page">
+    <div class="header-card">
+      <div>
+        <h1>
+          {{ produto.nome }}
+        </h1>
+
+        <div class="badge-container">
+          @if (produto.ativo) {
+            <span class="status-ativo-badge"> ATIVO </span>
+          } @else {
+            <span class="status-inativo-badge"> INATIVO </span>
+          }
+        </div>
+      </div>
+
+      <div class="valor-venda-card">
+        <span> Valor de Venda </span>
+
+        <strong>
+          {{ produto.valorVenda | currency: 'BRL' }}
+        </strong>
+      </div>
     </div>
 
-    <div class="details-grid">
-      <div class="detail-item">
-        <label>Código</label>
+    <div class="grid-duplo">
+      <div class="section-card">
+        <h2>Identificação</h2>
 
-        <span>
+        <div class="info">
+          <strong>Código:</strong>
+
           {{ produto.codigo }}
-        </span>
-      </div>
+        </div>
 
-      <div class="detail-item">
-        <label>Nome</label>
+        <div class="info">
+          <strong>Categoria:</strong>
 
-        <span>
-          {{ produto.nome }}
-        </span>
-      </div>
-
-      <div class="detail-item full-width">
-        <label>Descrição</label>
-
-        <span>
-          {{ produto.descricao || '-' }}
-        </span>
-      </div>
-
-      <div class="detail-item">
-        <label>Categoria</label>
-
-        <span>
           {{ produto.categoriaNome }}
-        </span>
-      </div>
+        </div>
 
-      <div class="detail-item">
-        <label>Marca</label>
+        <div class="info">
+          <strong>Marca:</strong>
 
-        <span>
           {{ produto.marca || '-' }}
-        </span>
-      </div>
+        </div>
 
-      <div class="detail-item">
-        <label>Unidade de Medida</label>
+        <div class="info">
+          <strong>Unidade:</strong>
 
-        <span>
           {{ produto.unidadeMedida || '-' }}
-        </span>
+        </div>
       </div>
 
-      <div class="detail-item">
-        <label>Estoque Atual</label>
+      <div class="section-card">
+        <h2>Estoque</h2>
 
-        <span>
+        <div class="info">
+          <strong>Estoque Atual:</strong>
+
           {{ produto.estoqueAtual }}
-        </span>
-      </div>
+        </div>
 
-      <div class="detail-item">
-        <label>Estoque Mínimo</label>
+        <div class="info">
+          <strong>Estoque Mínimo:</strong>
 
-        <span>
           {{ produto.estoqueMinimo }}
-        </span>
+        </div>
+
+        <div class="info">
+          <strong>Status:</strong>
+
+          @if (produto.estoqueAtual <= 0) {
+            <span class="status-sem-estoque"> Sem Estoque </span>
+          } @else if (produto.estoqueAtual <= produto.estoqueMinimo) {
+            <span class="status-critico"> Crítico </span>
+          } @else {
+            <span class="status-saudavel"> Saudável </span>
+          }
+        </div>
       </div>
+    </div>
 
-      <div class="detail-item">
-        <label>Valor de Custo</label>
+    <div class="grid-duplo">
+      <div class="section-card">
+        <h2>Financeiro</h2>
 
-        <span>
+        <div class="info">
+          <strong>Valor de Custo:</strong>
+
           {{ produto.valorCusto | currency: 'BRL' }}
-        </span>
-      </div>
+        </div>
 
-      <div class="detail-item">
-        <label>Valor de Venda</label>
+        <div class="info destaque">
+          <strong>Valor de Venda:</strong>
 
-        <span>
           {{ produto.valorVenda | currency: 'BRL' }}
-        </span>
+        </div>
       </div>
 
-      <div class="detail-item">
-        <label>Status Estoque</label>
+      <div class="section-card">
+        <h2>Situação</h2>
 
-        @if (produto.estoqueAtual <= 0) {
-          <span class="status-sem-estoque"> Sem Estoque </span>
-        } @else if (produto.estoqueAtual <= produto.estoqueMinimo) {
-          <span class="status-critico"> Crítico </span>
-        } @else {
-          <span class="status-saudavel"> Saudável </span>
-        }
+        <div class="info">
+          @if (produto.ativo) {
+            <span class="status-ativo"> Produto disponível para venda </span>
+          } @else {
+            <span class="status-inativo"> Produto inativo </span>
+          }
+        </div>
       </div>
+    </div>
 
-      <div class="detail-item">
-        <label>Status Produto</label>
+    <div class="section-card">
+      <h2>Descrição</h2>
 
-        @if (produto.ativo) {
-          <span class="status-ativo"> Ativo </span>
-        } @else {
-          <span class="status-inativo"> Inativo </span>
-        }
+      <div class="info">
+        {{ produto.descricao || '-' }}
       </div>
     </div>
   </div>

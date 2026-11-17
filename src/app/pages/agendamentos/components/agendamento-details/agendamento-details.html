@@ -1,69 +1,118 @@
 @if (agendamento) {
-  <div class="details-container">
-    <div class="details-header">
-      <h2>Dados do Agendamento</h2>
+  <div class="agendamento-page">
+    <div class="status-card">
+      <div>
+        <div class="status-title">Agendamento #{{ agendamento.id }}</div>
+
+        <div class="status-subtitle">
+          @if (agendamento.status === 'AGENDADO') {
+            <span class="status-agendado-badge"> AGENDADO </span>
+          } @else if (agendamento.status === 'FINALIZADO') {
+            <span class="status-finalizado-badge"> FINALIZADO </span>
+          } @else {
+            <span class="status-cancelado-badge"> CANCELADO </span>
+          }
+        </div>
+      </div>
+
+      @if (agendamento.status === 'AGENDADO') {
+        <div class="actions">
+          @if (podeFinalizar) {
+            <button type="button" class="btn-finalizar" (click)="solicitarFinalizacao()">
+              Finalizar Agendamento
+            </button>
+          }
+
+          @if (podeCancelar) {
+            <button type="button" class="btn-cancelar" (click)="solicitarCancelamento()">
+              Cancelar Agendamento
+            </button>
+          }
+        </div>
+      }
     </div>
 
-    <div class="details-grid">
-      <div class="detail-item">
-        <label> ID </label>
+    <div class="grid-duplo">
+      <div class="section-card">
+        <h2>Cliente</h2>
 
-        <span>
-          {{ agendamento.id }}
-        </span>
-      </div>
+        <div class="info">
+          <strong>Nome:</strong>
 
-      <div class="detail-item">
-        <label> Cliente </label>
-
-        <span>
           {{ agendamento.cliente }}
-        </span>
+        </div>
+
+        <div class="info">
+          <strong>ID:</strong>
+
+          {{ agendamento.clienteId }}
+        </div>
       </div>
 
-      <div class="detail-item">
-        <label> Raia </label>
+      <div class="section-card">
+        <h2>Raia</h2>
 
-        <span>
+        <div class="info">
+          <strong>Descrição:</strong>
+
           {{ agendamento.raia }}
-        </span>
+        </div>
+
+        <div class="info">
+          <strong>ID:</strong>
+
+          {{ agendamento.raiaId }}
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2>Horários</h2>
+
+      <div class="info">
+        <strong>Início:</strong>
+
+        {{ agendamento.dataInicio | date: 'dd/MM/yyyy HH:mm' }}
       </div>
 
-      <div class="detail-item">
-        <label> Data/Hora Início </label>
+      <div class="info">
+        <strong>Fim:</strong>
 
-        <span>
-          {{ agendamento.dataInicio | date: 'dd/MM/yyyy HH:mm' }}
-        </span>
+        {{ agendamento.dataFim | date: 'dd/MM/yyyy HH:mm' }}
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2>Observação</h2>
+
+      <div class="info">
+        {{ agendamento.observacao || '-' }}
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2>Auditoria</h2>
+
+      <div class="info">
+        <strong>Status:</strong>
+
+        {{ agendamento.status }}
       </div>
 
-      <div class="detail-item">
-        <label> Data/Hora Fim </label>
+      <div class="info">
+        <strong>Data de Início:</strong>
 
-        <span>
-          {{ agendamento.dataFim | date: 'dd/MM/yyyy HH:mm' }}
-        </span>
+        {{ agendamento.dataInicio | date: 'dd/MM/yyyy HH:mm' }}
       </div>
 
-      <div class="detail-item">
-        <label> Status </label>
+      <div class="info">
+        <strong>Data de Fim:</strong>
 
-        @if (agendamento.status === 'AGENDADO') {
-          <span class="status-agendado"> Agendado </span>
-        } @else if (agendamento.status === 'FINALIZADO') {
-          <span class="status-finalizado"> Finalizado </span>
-        } @else {
-          <span class="status-cancelado"> Cancelado </span>
-        }
+        {{ agendamento.dataFim | date: 'dd/MM/yyyy HH:mm' }}
       </div>
-
-      <div class="detail-item full-width">
-        <label> Observação </label>
-
-        <span>
-          {{ agendamento.observacao || '-' }}
-        </span>
-      </div>
+    </div>
+    <div class="actions">
+      <button class="btn-secondary" type="button" onclick="history.back()">Voltar</button>
     </div>
   </div>
 }

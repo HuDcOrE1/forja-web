@@ -8,7 +8,7 @@
       <canvas
         baseChart
         [data]="receitaFormaPagamentoChart"
-        [options]="chartOptions"
+        [options]="financeiroChartOptions"
         [type]="doughnutChartType"
       >
       </canvas>
@@ -19,7 +19,12 @@
     <h2>Ocupação das Raias</h2>
 
     <div class="grafico">
-      <canvas baseChart [data]="ocupacaoRaiasChart" [options]="chartOptions" [type]="barChartType">
+      <canvas
+        baseChart
+        [data]="ocupacaoRaiasChart"
+        [options]="quantidadeChartOptions"
+        [type]="barChartType"
+      >
       </canvas>
     </div>
   </div>
@@ -57,7 +62,7 @@
       <h3>Valor Financeiro</h3>
 
       <p class="valor">
-        {{ saudeEstoque.valorFinanceiroEstoque }}
+        {{ saudeEstoque.valorFinanceiroEstoque | currency: 'BRL' }}
       </p>
     </div>
   </div>
@@ -94,17 +99,13 @@
     <div class="card">
       <h3>Taxa Conversão (%)</h3>
 
-      <p class="valor success">
-        {{ conversaoOperacional.taxaConversao }}
-      </p>
+      <p class="valor success">{{ conversaoOperacional.taxaConversao | number: '1.2-2' }}%</p>
     </div>
 
     <div class="card">
       <h3>Taxa Cancelamento (%)</h3>
 
-      <p class="valor danger">
-        {{ conversaoOperacional.taxaCancelamento }}
-      </p>
+      <p class="valor danger">{{ conversaoOperacional.taxaCancelamento | number: '1.2-2' }}%</p>
     </div>
   </div>
 }

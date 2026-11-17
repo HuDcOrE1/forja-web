@@ -12,6 +12,8 @@ import { SaidaEstoqueRequest } from '../models/saida-estoque-request';
 
 import { MovimentacaoEstoqueResponse } from '../models/movimentacao-estoque-response';
 
+import { PageResponse } from '../models/page-response';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -28,11 +30,31 @@ export class MovimentacaoEstoqueService {
     return this.http.post<MovimentacaoEstoqueResponse>(`${this.API}/saida`, request);
   }
 
-  historico(): Observable<MovimentacaoEstoqueResponse[]> {
-    return this.http.get<MovimentacaoEstoqueResponse[]>(`${this.API}/historico`);
+  historico(
+    page = 0,
+    size = 20,
+    produtoId?: number,
+    tipo?: string,
+  ): Observable<PageResponse<MovimentacaoEstoqueResponse>> {
+    const params: Record<string, string> = {
+      page: String(page),
+      size: String(size),
+    };
+
+    if (produtoId) {
+      params['produtoId'] = String(produtoId);
+    }
+
+    if (tipo) {
+      params['tipo'] = tipo;
+    }
+
+    return this.http.get<PageResponse<MovimentacaoEstoqueResponse>>(`${this.API}/historico`, {
+      params,
+    });
   }
 
-  historicoProduto(produtoId: number): Observable<MovimentacaoEstoqueResponse[]> {
-    return this.http.get<MovimentacaoEstoqueResponse[]>(`${this.API}/produto/${produtoId}`);
+  historicoProduto(produtoId: number): Observable<PageResponse<MovimentacaoEstoqueResponse>> {
+    return this.historico(0, 20, produtoId);
   }
 }

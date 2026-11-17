@@ -1,33 +1,177 @@
-.details-container {
-  background: white;
-
-  border-radius: 12px;
-
-  padding: 1.5rem;
-
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+:host {
+  display: block;
 }
 
-.details-header {
-  margin-bottom: 1.5rem;
+.agendamento-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.details-header h2 {
-  margin: 0;
+/* =========================
+   STATUS CARD
+========================= */
 
-  color: #111827;
+.status-card {
+  display: flex;
 
-  font-size: 1.5rem;
+  justify-content: space-between;
+
+  align-items: center;
+
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+
+  color: white;
+
+  border-radius: 16px;
+
+  padding: 1.5rem 2rem;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.status-title {
+  font-size: 1.6rem;
 
   font-weight: 700;
 }
 
-.details-grid {
-  display: grid;
+.status-subtitle {
+  margin-top: 0.75rem;
+}
 
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+.status-agendado-badge,
+.status-finalizado-badge,
+.status-cancelado-badge {
+  display: inline-block;
+
+  padding: 0.4rem 0.9rem;
+
+  border-radius: 999px;
+
+  color: white;
+
+  font-size: 0.85rem;
+
+  font-weight: 700;
+}
+
+.status-agendado-badge {
+  background: #ca8a04;
+}
+
+.status-finalizado-badge {
+  background: #16a34a;
+}
+
+.status-cancelado-badge {
+  background: #dc2626;
+}
+
+/* =========================
+   AÇÕES
+========================= */
+
+.actions {
+  display: flex;
 
   gap: 1rem;
+}
+
+.btn-finalizar {
+  border: none;
+
+  border-radius: 10px;
+
+  background: #16a34a;
+
+  color: white;
+
+  padding: 0.85rem 1.25rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.btn-finalizar:hover {
+  background: #15803d;
+}
+
+.btn-cancelar {
+  border: none;
+
+  border-radius: 10px;
+
+  background: #dc2626;
+
+  color: white;
+
+  padding: 0.85rem 1.25rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.btn-cancelar:hover {
+  background: #b91c1c;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.section-card {
+  background: white;
+
+  border-radius: 16px;
+
+  padding: 1.5rem;
+
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.section-card h2 {
+  margin: 0 0 1rem;
+
+  color: #111827;
+
+  font-size: 1.1rem;
+
+  font-weight: 700;
+}
+
+/* =========================
+   GRID SUPERIOR
+========================= */
+
+.grid-duplo {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 1.5rem;
+}
+
+/* =========================
+   INFORMAÇÕES
+========================= */
+
+.info {
+  margin-bottom: 0.75rem;
+
+  color: #374151;
+
+  font-size: 0.95rem;
+}
+
+.info strong {
+  color: #111827;
 }
 
 .detail-item {
@@ -38,16 +182,12 @@
   gap: 0.35rem;
 }
 
-.full-width {
-  grid-column: 1 / -1;
-}
-
 .detail-item label {
+  color: #6b7280;
+
   font-size: 0.85rem;
 
   font-weight: 600;
-
-  color: #6b7280;
 }
 
 .detail-item span {
@@ -55,6 +195,14 @@
 
   font-size: 1rem;
 }
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* =========================
+   STATUS LEGADO
+========================= */
 
 .status-agendado {
   color: #ca8a04;
@@ -72,4 +220,59 @@
   color: #dc2626;
 
   font-weight: 700;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 992px) {
+  .status-card {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 1rem;
+  }
+
+  .grid-duplo {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .actions {
+    width: 100%;
+
+    flex-direction: column;
+  }
+
+  .btn-finalizar,
+  .btn-cancelar {
+    width: 100%;
+  }
+}
+
+.actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 1rem;
+}
+
+.btn-secondary {
+  border: 1px solid #d1d5db;
+
+  border-radius: 8px;
+
+  padding: 0.85rem 1.5rem;
+
+  background: white;
+
+  color: #374151;
+
+  font-weight: 600;
+
+  cursor: pointer;
 }

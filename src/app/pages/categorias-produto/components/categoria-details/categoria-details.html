@@ -1,42 +1,56 @@
 @if (categoria) {
-  <div class="details-container">
-    <div class="details-header">
-      <h2>Dados da Categoria</h2>
+  <div class="categoria-page">
+    <div class="header-card">
+      <div>
+        <h1>
+          {{ categoria.nome }}
+        </h1>
+
+        <div class="status">
+          @if (categoria.ativo) {
+            <span class="status-ativo-badge"> ATIVA </span>
+          } @else {
+            <span class="status-inativo-badge"> INATIVA </span>
+          }
+        </div>
+      </div>
     </div>
 
-    <div class="details-grid">
-      <div class="detail-item">
-        <label> ID </label>
+    <div class="grid-duplo">
+      <div class="section-card">
+        <h2>Identificação</h2>
 
-        <span>
+        <div class="info">
+          <strong>ID:</strong>
+
           {{ categoria.id }}
-        </span>
-      </div>
+        </div>
 
-      <div class="detail-item">
-        <label> Nome </label>
+        <div class="info">
+          <strong>Nome:</strong>
 
-        <span>
           {{ categoria.nome }}
-        </span>
+        </div>
       </div>
 
-      <div class="detail-item full-width">
-        <label> Descrição </label>
+      <div class="section-card">
+        <h2>Status</h2>
 
-        <span>
-          {{ categoria.descricao || '-' }}
-        </span>
+        <div class="info">
+          @if (categoria.ativo) {
+            <span class="status-ativo"> Disponível para uso </span>
+          } @else {
+            <span class="status-inativo"> Indisponível </span>
+          }
+        </div>
       </div>
+    </div>
 
-      <div class="detail-item">
-        <label> Status </label>
+    <div class="section-card">
+      <h2>Descrição</h2>
 
-        @if (categoria.ativo) {
-          <span class="status-ativo"> Ativa </span>
-        } @else {
-          <span class="status-inativo"> Inativa </span>
-        }
+      <div class="info">
+        {{ categoria.descricao || '-' }}
       </div>
     </div>
   </div>

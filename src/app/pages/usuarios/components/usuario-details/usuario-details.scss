@@ -1,0 +1,125 @@
+:host {
+  display: block;
+}
+
+.usuario-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header-card {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+
+  color: white;
+
+  border-radius: 16px;
+
+  padding: 1.5rem 2rem;
+}
+
+.header-card h1 {
+  margin: 0;
+
+  font-size: 2rem;
+
+  font-weight: 700;
+}
+
+.status {
+  margin-top: 1rem;
+}
+
+.status-ativo {
+  display: inline-block;
+
+  background: #16a34a;
+
+  color: white;
+
+  padding: 0.4rem 0.8rem;
+
+  border-radius: 999px;
+
+  font-size: 0.85rem;
+
+  font-weight: 700;
+}
+
+.status-inativo {
+  display: inline-block;
+
+  background: #dc2626;
+
+  color: white;
+
+  padding: 0.4rem 0.8rem;
+
+  border-radius: 999px;
+
+  font-size: 0.85rem;
+
+  font-weight: 700;
+}
+
+.grid-duplo {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 1.5rem;
+}
+
+.section-card {
+  background: white;
+
+  border-radius: 16px;
+
+  padding: 1.5rem;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.section-card h2 {
+  margin: 0 0 1rem;
+
+  font-size: 1.2rem;
+
+  font-weight: 700;
+
+  color: #111827;
+}
+
+.info {
+  margin-bottom: 0.75rem;
+
+  color: #374151;
+}
+
+.perfil-container {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 0.75rem;
+}
+
+.perfil-badge {
+  padding: 0.4rem 0.75rem;
+
+  border-radius: 999px;
+
+  background: #f59e0b;
+
+  color: white;
+
+  font-weight: 700;
+
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .grid-duplo {
+    grid-template-columns: 1fr;
+  }
+}
