@@ -39,6 +39,8 @@ export class UsuarioFormComponent implements OnInit {
       email: value.email,
       ativo: value.ativo,
     });
+
+    this.sincronizarPerfis();
   }
 
   get usuario(): UsuarioResponse | undefined {
@@ -68,15 +70,21 @@ export class UsuarioFormComponent implements OnInit {
     this.perfilService.listar().subscribe((perfis) => {
       this.perfisDisponiveis = perfis;
 
-      if (this.usuario) {
-        const perfisSelecionados = perfis
-          .filter((perfil) => this.usuario?.perfis.includes(perfil.nome))
-          .map((perfil) => perfil.id);
+      this.sincronizarPerfis();
+    });
+  }
 
-        this.form.patchValue({
-          perfis: perfisSelecionados,
-        });
-      }
+  private sincronizarPerfis(): void {
+    if (!this.usuario || this.perfisDisponiveis.length === 0) {
+      return;
+    }
+
+    const perfisSelecionados = this.perfisDisponiveis
+      .filter((perfil) => this.usuario!.perfis.includes(perfil.nome))
+      .map((perfil) => perfil.id);
+
+    this.form.patchValue({
+      perfis: perfisSelecionados,
     });
   }
 
