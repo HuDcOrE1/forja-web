@@ -31,11 +31,17 @@ export class ClienteLookupComponent {
     this._cliente = value;
 
     if (!value) {
+      this.termo = '';
+      this.clientes = [];
+
       return;
     }
 
     this.termo = value.nome;
   }
+
+  @Input()
+  modoCompacto = false;
 
   get cliente(): ClienteResponse | undefined {
     return this._cliente;

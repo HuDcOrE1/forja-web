@@ -52,15 +52,16 @@
 ) {
   <form class="filtros" (ngSubmit)="aplicarFiltros()">
     @if (tipoRelatorio === 'vendas') {
-      <label>
-        Cliente
-        <select name="clienteId" [(ngModel)]="clienteId">
-          <option [ngValue]="null">Todos</option>
-          @for (cliente of clientesDisponiveis; track cliente.id) {
-            <option [ngValue]="cliente.id">{{ cliente.nome }}</option>
-          }
-        </select>
-      </label>
+      <div class="form-group">
+        <label>Cliente</label>
+
+        <app-cliente-lookup
+          [modoCompacto]="true"
+          [cliente]="clienteSelecionado"
+          (clienteSelecionado)="selecionarCliente($event)"
+        >
+        </app-cliente-lookup>
+      </div>
 
       <label>
         Forma de pagamento
@@ -111,15 +112,16 @@
     }
 
     @if (tipoRelatorio === 'agendamentos') {
-      <label>
-        Cliente
-        <select name="clienteAgendamentoId" [(ngModel)]="clienteAgendamentoId">
-          <option [ngValue]="null">Todos</option>
-          @for (cliente of clientesDisponiveis; track cliente.id) {
-            <option [ngValue]="cliente.id">{{ cliente.nome }}</option>
-          }
-        </select>
-      </label>
+      <div class="form-group">
+        <label>Cliente</label>
+
+        <app-cliente-lookup
+          [modoCompacto]="true"
+          [cliente]="clienteAgendamentoSelecionado"
+          (clienteSelecionado)="selecionarClienteAgendamento($event)"
+        >
+        </app-cliente-lookup>
+      </div>
 
       <label>
         Raia
@@ -138,12 +140,13 @@
     }
 
     <button class="btn-primary" type="submit">Aplicar filtros</button>
+    <button type="button" class="btn-secondary" (click)="limparFiltros()">Limpar filtros</button>
   </form>
 }
 
 @if (tipoRelatorio === 'vendas' || tipoRelatorio === 'estoque') {
   <section class="exportacao" aria-label="Exportar relatório">
-    <span>Exportar todos os registros — a API não aplica os filtros ao arquivo.</span>
+    <span>Os arquivos exportados respeitam os filtros aplicados.</span>
     <button type="button" (click)="exportar('csv')" [disabled]="exportando">CSV</button>
     <button type="button" (click)="exportar('xlsx')" [disabled]="exportando">Excel</button>
     <button type="button" (click)="exportar('pdf')" [disabled]="exportando">PDF</button>

@@ -66,8 +66,14 @@ export class RelatorioService {
     return this.http.get<RelatorioRaia[]>(`${this.API}/raias`);
   }
 
-  exportar(tipo: 'vendas' | 'estoque', formato: FormatoExportacao): Observable<Blob> {
+  exportar(
+    tipo: 'vendas' | 'estoque',
+    formato: FormatoExportacao,
+    filtros?: Parametros,
+  ): Observable<Blob> {
     return this.http.get(`${this.API}/${tipo}/export/${formato}`, {
+      params: filtros ? this.criarParametros(filtros) : new HttpParams(),
+
       responseType: 'blob',
     });
   }

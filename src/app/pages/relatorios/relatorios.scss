@@ -91,6 +91,22 @@
   }
 }
 
+.btn-secondary {
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  padding: 0.65rem 1rem;
+  background: #ffffff;
+  color: #374151;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+  }
+}
+
 .exportacao {
   align-items: center;
   justify-content: flex-end;

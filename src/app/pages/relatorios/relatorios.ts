@@ -20,17 +20,18 @@ import { CategoriaProdutoService } from '../../core/services/categoria-produto';
 import { ClienteService } from '../../core/services/cliente.service';
 import { RaiaService } from '../../core/services/raia.service';
 import { RelatorioService } from '../../core/services/relatorio.service';
+import { ClienteLookupComponent } from '../../shared/components/cliente-lookup/cliente-lookup';
 
 @Component({
   selector: 'app-relatorios',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ClienteLookupComponent],
   templateUrl: './relatorios.html',
   styleUrl: './relatorios.scss',
 })
 export class RelatoriosComponent implements OnInit {
   private readonly relatorioService = inject(RelatorioService);
-  private readonly clienteService = inject(ClienteService);
+
   private readonly raiaService = inject(RaiaService);
   private readonly categoriaService = inject(CategoriaProdutoService);
 
@@ -66,7 +67,6 @@ export class RelatoriosComponent implements OnInit {
   raiaId: number | null = null;
   statusAgendamento = '';
 
-  clientesDisponiveis: ClienteResponse[] = [];
   raiasDisponiveis: RaiaResponse[] = [];
   categoriasDisponiveis: CategoriaProdutoResponse[] = [];
 
@@ -75,6 +75,10 @@ export class RelatoriosComponent implements OnInit {
   clientes?: RelatorioClientes;
   agendamentos: RelatorioAgendamento[] = [];
   raias: RelatorioRaia[] = [];
+
+  clienteSelecionado?: ClienteResponse;
+
+  clienteAgendamentoSelecionado?: ClienteResponse;
 
   ngOnInit(): void {
     this.carregarOpcoes();
@@ -133,36 +137,54 @@ export class RelatoriosComponent implements OnInit {
     }
 
     const tipo = this.tipoRelatorio;
+
+    let filtros: any = {};
+
+    if (tipo === 'vendas') {
+      filtros = {
+        clienteId: this.clienteId,
+        formaPagamento: this.formaPagamento,
+        status: this.statusVenda,
+        inicio: this.inicio ? `${this.inicio}T00:00:00` : null,
+        fim: this.fim ? `${this.fim}T23:59:59.999999999` : null,
+      };
+    }
+
+    if (tipo === 'estoque') {
+      filtros = {
+        categoriaId: this.categoriaId,
+        estoqueMinimo: this.estoqueMinimo,
+      };
+    }
+
     this.exportando = true;
     this.erro = '';
 
-    this.relatorioService.exportar(tipo, formato).subscribe({
+    this.relatorioService.exportar(tipo, formato, filtros).subscribe({
       next: (arquivo) => {
         const url = URL.createObjectURL(arquivo);
+
         const link = document.createElement('a');
+
         link.href = url;
         link.download = `${tipo}.${formato}`;
+
         link.click();
+
         URL.revokeObjectURL(url);
+
         this.exportando = false;
       },
+
       error: (error: unknown) => {
         this.erro = this.mensagemErro(error);
+
         this.exportando = false;
       },
     });
   }
 
   private carregarOpcoes(): void {
-    this.clienteService.listar(0, 100, undefined, true).subscribe({
-      next: (response) => {
-        this.clientesDisponiveis = response.content;
-      },
-      error: () => {
-        this.erroOpcoes = 'Não foi possível carregar a lista de clientes.';
-      },
-    });
-
     this.raiaService.listar().subscribe({
       next: (raias) => (this.raiasDisponiveis = raias),
       error: () => (this.erroOpcoes = 'Não foi possível carregar a lista de raias.'),
@@ -260,5 +282,41 @@ export class RelatoriosComponent implements OnInit {
 
   fecharCalendario(event: Event): void {
     (event.target as HTMLInputElement).blur();
+  }
+
+  selecionarCliente(cliente: ClienteResponse): void {
+    this.clienteSelecionado = cliente;
+
+    this.clienteId = cliente.id;
+  }
+
+  selecionarClienteAgendamento(cliente: ClienteResponse): void {
+    this.clienteAgendamentoSelecionado = cliente;
+
+    this.clienteAgendamentoId = cliente.id;
+  }
+
+  limparFiltros(): void {
+    this.clienteId = null;
+    this.clienteSelecionado = undefined;
+
+    this.clienteAgendamentoId = null;
+    this.clienteAgendamentoSelecionado = undefined;
+
+    this.formaPagamento = '';
+    this.statusVenda = '';
+
+    this.inicio = '';
+    this.fim = '';
+
+    this.categoriaId = null;
+    this.estoqueMinimo = null;
+
+    this.raiaId = null;
+    this.statusAgendamento = '';
+
+    this.paginaAtual = 0;
+
+    this.carregarRelatorio();
   }
 }
